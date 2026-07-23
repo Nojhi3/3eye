@@ -28,6 +28,7 @@ export default function LoginPage() {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors }
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -37,6 +38,8 @@ export default function LoginPage() {
       role: "homeowner"
     }
   });
+
+  const selectedRole = watch("role");
 
   const onSubmit = async (data: LoginFormValues) => {
     setLoading(true);
@@ -109,45 +112,21 @@ export default function LoginPage() {
               <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">
                 Select Your Role
               </label>
-              <div className="grid grid-cols-3 gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
+              <div className="grid grid-cols-3 gap-2 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
                 {(["homeowner", "technician", "admin"] as const).map((r) => (
                   <button
                     key={r}
                     type="button"
                     onClick={() => setValue("role", r)}
-                    className="py-2 text-[11px] font-bold rounded-lg capitalize transition-all duration-200"
-                    {...register("role")}
-                    style={{
-                      backgroundColor:
-                        errors.role?.message === undefined &&
-                        r === (document.querySelector('input[name="role"]:checked') as HTMLInputElement)?.value
-                          ? "#312E81"
-                          : ""
-                    }}
+                    className={`py-2 text-xs font-bold rounded-lg capitalize transition-all duration-200 ${
+                      selectedRole === r
+                        ? "bg-indigo-600 text-white shadow-md shadow-indigo-650/15"
+                        : "text-slate-400 hover:text-slate-200 bg-transparent"
+                    }`}
                   >
                     {r}
                   </button>
                 ))}
-              </div>
-              <div className="flex justify-around mt-1">
-                <label className="flex items-center gap-1.5 cursor-pointer">
-                  <input type="radio" value="homeowner" {...register("role")} className="sr-only" />
-                  <span className="text-xs font-medium text-slate-300 px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-950/60 checked:bg-indigo-600 select-none capitalize">
-                    Homeowner
-                  </span>
-                </label>
-                <label className="flex items-center gap-1.5 cursor-pointer">
-                  <input type="radio" value="technician" {...register("role")} className="sr-only" />
-                  <span className="text-xs font-medium text-slate-300 px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-950/60 checked:bg-indigo-600 select-none capitalize">
-                    Technician
-                  </span>
-                </label>
-                <label className="flex items-center gap-1.5 cursor-pointer">
-                  <input type="radio" value="admin" {...register("role")} className="sr-only" />
-                  <span className="text-xs font-medium text-slate-300 px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-950/60 checked:bg-indigo-600 select-none capitalize">
-                    Admin
-                  </span>
-                </label>
               </div>
               {errors.role && <p className="mt-1 text-xs text-rose-400 font-medium">{errors.role.message}</p>}
             </div>

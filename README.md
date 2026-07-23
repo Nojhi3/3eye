@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SmartNest AI - Intelligent Smart Home Platform
 
-## Getting Started
+SmartNest AI is a complete, production-ready, AI-powered smart home automation platform. It leverages Google Gemini AI models to help homeowners discover, simulate, install, and maintain smart home devices.
 
-First, run the development server:
+Unlike traditional smart home providers, **SmartNest AI** provides:
+1.  **AI Smart Home Consultant:** Interactive chatbot audits that suggest custom hardware packages based on house size, room counts, budgets, and family priorities.
+2.  **AI Energy Optimizer:** Model utility metrics (electric bills, active appliances) and generate Recharts comparisons showing shaven load projections.
+3.  **AI Predictive Maintenance:** Predict device failures, warn homeowners of low battery statuses (e.g., Yale deadbolt at 12%), and enable certified technician dispatches.
+4.  **Role-Based Interconnected Workspaces:** Clean dashboard views for **Homeowners** (overview, devices, calendar setup), **Technicians** (assigned job lists, mounting checklists, diagnostics checkouts), and **Administrators** (user registry, package specs, staffing assignments).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🛠️ Technology Stack
+
+*   **Core:** Next.js 15 (App Router), React 19, TypeScript
+*   **Styling & FX:** TailwindCSS (v4), Framer Motion
+*   **Analytics:** Recharts
+*   **Form & Validation:** React Hook Form, Zod, Hookform Resolvers
+*   **AI Integration:** Google Gemini SDK (`@google/generative-ai`)
+*   **State & DB:** Global React Context (`localStorage` persistence)
+
+---
+
+## 🚀 Running Locally
+
+1.  Clone the repository files to your local environment.
+2.  Install dependencies (using the legacy peer deps flag due to React 19 chart package syncs):
+    ```bash
+    npm install --legacy-peer-deps
+    ```
+3.  Set up your Google Gemini API key inside `.env.local` (Optional - a smart mock chat engine executes automatically if empty):
+    ```env
+    GEMINI_API_KEY=your-gemini-api-key-here
+    ```
+4.  Launch the developer server:
+    ```bash
+    npm run dev
+    ```
+5.  Open `http://localhost:3000` inside your browser.
+
+---
+
+## 👥 Demo Quick Login Personas
+
+For testing or presenting to stakeholders, we have embedded **Demo Quick Login** triggers on the login screen:
+*   **Homeowner:** Logs in as *John Doe* (`homeowner@smartnest.ai`, password: `password`). Accesses device controls, booking sheets, and energy simulations.
+*   **Technician:** Logs in as *Alex Smith* (`tech@smartnest.ai`, password: `password`). Accesses mounting checklists, diagnostic note uploads, and job checkouts.
+*   **Administrator:** Logs in as *Sarah Jenkins* (`admin@smartnest.ai`, password: `password`). Accesses user directories, package prices, and dispatch assignments.
+
+*Note: Completing jobs as a Technician automatically provisions smart deadbolts and bridges into the corresponding Homeowner's device directory.*
+
+---
+
+## 📁 System Folder Structure
+
+```
+├── public/                 # Static SVGs, icon layers
+├── src/
+│   ├── app/                # Next.js Pages & REST API routes
+│   │   ├── api/chat/       # Gemini AI router (with fallback mock loops)
+│   │   ├── auth/           # Login, Signup, Forgot reset
+│   │   ├── admin/          # Admin KPI & table matrices
+│   │   ├── appointments/   # Installations booking sheets
+│   │   ├── dashboard/      # Homeowner analytics charts
+│   │   ├── devices/        # Telemetry toggles, delete & add
+│   │   ├── maintenance/    # Predictive warning cards, tech checkout logs
+│   │   ├── ai-assistant/   # Conversational Chat Console
+│   │   ├── profile/        # Credentials edit forms, SMS alerts toggles
+│   │   └── technician/     # Technician onsite checklists & diagnostic uploads
+│   ├── components/         # Dashboard layout sidebar & TopNav switchers
+│   └── context/            # Global AppContext database state
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 Technical System Documentation
+For deep-dive architecture layouts, database ER diagrams, API schemas, testing plans, and deployment checklists, view the [smartnest_system_documentation.md](file:///C:/Users/aksha/.gemini/antigravity-cli/brain/b7007bb2-eb94-415e-8331-892b1dfcf838/smartnest_system_documentation.md) artifact.
