@@ -237,10 +237,7 @@ export default function HomeownerDashboard() {
               {optimizationLoading ? (
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
               ) : (
-                <>
-                  Optimize Utility Load
-                  <Sparkles className="ml-1.5 h-3.5 w-3.5 text-white animate-pulse" />
-                </>
+                "Optimize Utility Load"
               )}
             </button>
           </form>
@@ -286,16 +283,26 @@ export default function HomeownerDashboard() {
           <div className="flex-1 min-h-[220px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="month" stroke="#64748b" fontSize={10} tickLine={false} />
-                <YAxis stroke="#64748b" fontSize={10} tickLine={false} />
+                <defs>
+                  <linearGradient id="barBefore" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#6366f1" stopOpacity={0.8}/>
+                    <stop offset="100%" stopColor="#312e81" stopOpacity={0.2}/>
+                  </linearGradient>
+                  <linearGradient id="barAfter" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#10b981" stopOpacity={0.8}/>
+                    <stop offset="100%" stopColor="#064e3b" stopOpacity={0.2}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" opacity={0.3} />
+                <XAxis dataKey="month" stroke="#475569" fontSize={10} tickLine={false} />
+                <YAxis stroke="#475569" fontSize={10} tickLine={false} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: "#0f172a", borderColor: "#1e293b", borderRadius: "12px" }}
+                  contentStyle={{ backgroundColor: "#020617", borderColor: "#1e293b", borderRadius: "12px" }}
                   labelStyle={{ fontWeight: "bold", fontSize: "11px", color: "#f8fafc" }}
                   itemStyle={{ fontSize: "11px" }}
                 />
-                <Bar dataKey="before" fill="#6366f1" radius={[4, 4, 0, 0]} name="Before Automation ($)" />
-                <Bar dataKey="after" fill="#10b981" radius={[4, 4, 0, 0]} name="Optimized Nest ($)" />
+                <Bar dataKey="before" fill="url(#barBefore)" radius={[4, 4, 0, 0]} name="Before Automation ($)" />
+                <Bar dataKey="after" fill="url(#barAfter)" radius={[4, 4, 0, 0]} name="Optimized Nest ($)" />
               </BarChart>
             </ResponsiveContainer>
           </div>

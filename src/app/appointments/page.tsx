@@ -153,12 +153,8 @@ export default function AppointmentsPage() {
                     </span>
                     <ul className="space-y-1.5">
                       {apt.checklist.map((c, i) => (
-                        <li key={i} className="flex items-center gap-2 text-[11px] text-slate-300">
-                          {c.done ? (
-                            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                          ) : (
-                            <div className="h-3.5 w-3.5 rounded-full border border-slate-700 shrink-0" />
-                          )}
+                        <li key={i} className="flex items-start gap-1.5 text-[11px] text-slate-300 leading-relaxed">
+                          <span className="text-indigo-400 shrink-0 select-none">-</span>
                           <span className={c.done ? "line-through text-slate-500" : ""}>{c.item}</span>
                         </li>
                       ))}

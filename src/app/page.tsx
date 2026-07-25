@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
   Cpu,
@@ -136,11 +137,8 @@ export default function LandingPage() {
       {/* Header / Navbar */}
       <header className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-900/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 group cursor-pointer">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-emerald-500 shadow-md shadow-indigo-500/10">
-              <Sparkles className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-lg font-bold text-white tracking-tight">SmartNest <span className="text-indigo-400">AI</span></span>
+          <div className="flex items-center cursor-pointer">
+            <span className="text-lg font-bold text-white tracking-tight">SmartNest</span>
           </div>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
@@ -170,11 +168,8 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="relative pt-24 pb-20 md:pt-32 md:pb-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-wider">
-            <Zap className="h-3.5 w-3.5" />
-            Empowered by Gemini AI
-          </div>
+          {/* Spacing spacer */}
+          <div className="pt-2" />
 
           {/* Heading */}
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-[1.1]">
@@ -211,22 +206,18 @@ export default function LandingPage() {
           <div className="pt-12 max-w-5xl mx-auto">
             <div className="relative rounded-3xl border border-slate-800/80 bg-slate-900/20 p-2 shadow-2xl backdrop-blur-md">
               <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/5 to-emerald-500/5 rounded-3xl pointer-events-none" />
-              <div className="rounded-2xl border border-slate-850 overflow-hidden bg-slate-950 aspect-[16/9] flex items-center justify-center relative group">
-                <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
-                <div className="z-10 text-center space-y-4 px-6">
-                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 border border-slate-800 text-indigo-400 shadow-lg">
-                    <Cpu className="h-7 w-7 animate-pulse" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white">SmartNest Operating Core</h3>
-                  <p className="text-xs text-slate-400 max-w-sm">
-                    Interactive homeowner dashboard. Generates real-time device health schedules, smart routines, and utility charts.
-                  </p>
+              <div className="rounded-2xl border border-slate-850 overflow-hidden bg-slate-950 aspect-[16/9] relative group">
+                <img
+                  src="/dashboard_mockup.jpg"
+                  alt="SmartNest Operating Core Dashboard"
+                  className="w-full h-full object-cover opacity-85 group-hover:scale-102 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-slate-950/40 flex items-center justify-center">
                   <Link
                     href="/auth/login"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 hover:text-indigo-300 group"
+                    className="inline-flex h-11 items-center justify-center px-6 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white shadow-lg shadow-indigo-600/20 transition-all"
                   >
-                    Enter dashboard workspace
-                    <ChevronRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                    Enter Dashboard Workspace
                   </Link>
                 </div>
               </div>
@@ -455,11 +446,21 @@ export default function LandingPage() {
                     }`}
                   />
                 </button>
-                {activeFaq === index && (
-                  <div className="px-6 pb-5 pt-1 border-t border-slate-900/60 text-xs text-slate-400 leading-relaxed">
-                    {faq.a}
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {activeFaq === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-5 pt-1 border-t border-slate-900/60 text-xs text-slate-400 leading-relaxed">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
           </div>
@@ -492,14 +493,11 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-slate-900 bg-slate-950 py-8 mt-auto z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
-          <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-600">
-              <Sparkles className="h-4 w-4 text-white" />
-            </div>
-            <span className="text-sm font-bold text-white tracking-tight">SmartNest <span className="text-indigo-400">AI</span></span>
+          <div className="flex items-center cursor-pointer">
+            <span className="text-sm font-bold text-white tracking-tight">SmartNest</span>
           </div>
           <p className="text-[11px] text-slate-500 font-medium">
-            &copy; {new Date().getFullYear()} SmartNest AI Inc. All rights reserved. Created with Next.js 15, TailwindCSS, & Gemini AI.
+            &copy; {new Date().getFullYear()} SmartNest. All rights reserved.
           </p>
           <div className="flex gap-4 text-[11px] font-bold text-slate-400">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
