@@ -1,77 +1,81 @@
-# SmartNest AI - Intelligent Smart Home Platform
+# SmartNest - Intelligent Smart Home Platform
 
-SmartNest AI is a complete, production-ready, AI-powered smart home automation platform. It leverages Google Gemini AI models to help homeowners discover, simulate, install, and maintain smart home devices.
+SmartNest is a complete, production-ready, AI-powered smart home automation platform designed to help homeowners discover, purchase, install, and maintain smart home environments. The platform integrates a recommendation engine, utility billing optimizer charts, predictive failure alerts, and a technician dispatch loop.
 
-Unlike traditional smart home providers, **SmartNest AI** provides:
-1.  **AI Smart Home Consultant:** Interactive chatbot audits that suggest custom hardware packages based on house size, room counts, budgets, and family priorities.
-2.  **AI Energy Optimizer:** Model utility metrics (electric bills, active appliances) and generate Recharts comparisons showing shaven load projections.
-3.  **AI Predictive Maintenance:** Predict device failures, warn homeowners of low battery statuses (e.g., Yale deadbolt at 12%), and enable certified technician dispatches.
-4.  **Role-Based Interconnected Workspaces:** Clean dashboard views for **Homeowners** (overview, devices, calendar setup), **Technicians** (assigned job lists, mounting checklists, diagnostics checkouts), and **Administrators** (user registry, package specs, staffing assignments).
+Live Application URL: https://3eye-six.vercel.app/
+GitHub Repository URL: <insert-github-repo-url>
 
 ---
 
-## 🛠️ Technology Stack
+## Architecture and Core Workflow
 
-*   **Core:** Next.js 15 (App Router), React 19, TypeScript
-*   **Styling & FX:** TailwindCSS (v4), Framer Motion
-*   **Analytics:** Recharts
-*   **Form & Validation:** React Hook Form, Zod, Hookform Resolvers
-*   **AI Integration:** Google Gemini SDK (`@google/generative-ai`)
-*   **State & DB:** Global React Context (`localStorage` persistence)
+SmartNest is built as an interactive multi-role ecosystem using Next.js, React, TypeScript, and TailwindCSS. The system coordinates data flow dynamically across three specific user roles using a synchronized global state provider:
 
----
+1. Homeowners: Access the smart home console to monitor connected hardware, input monthly utility metrics for automated billing audits, and chat with the AI consultant. If the system flags a low battery alert (e.g. Yale Deadbolt battery drops to 12%), the homeowner can book service calls.
+2. Technicians: View active field dispatch jobs, follow customized checklists for specific smart package installations, upload completion remarks, and close orders. Closing an install order dynamically provisions the devices into the client homeowner's active console.
+3. Administrators: Manage global service inventories, adjust package base pricing, view staff rosters, and monitor live revenue dashboards.
 
-## 🚀 Running Locally
-
-1.  Clone the repository files to your local environment.
-2.  Install dependencies (using the legacy peer deps flag due to React 19 chart package syncs):
-    ```bash
-    npm install --legacy-peer-deps
-    ```
-3.  Set up your Google Gemini API key inside `.env.local` (Optional - a smart mock chat engine executes automatically if empty):
-    ```env
-    GEMINI_API_KEY=your-gemini-api-key-here
-    ```
-4.  Launch the developer server:
-    ```bash
-    npm run dev
-    ```
-5.  Open `http://localhost:3000` inside your browser.
+### State Management
+Data persistence is handled on the client side using a centralized global React Context provider (AppContext.tsx) backed by browser localStorage. This allows instant synchronization across workspaces (e.g., changing package pricing as an Admin immediately updates the homeowner catalog, and technicians completing setup checklists immediately populates the homeowner's active device list).
 
 ---
 
-## 👥 Demo Quick Login Personas
+## Technical Stack
 
-For testing or presenting to stakeholders, we have embedded **Demo Quick Login** triggers on the login screen:
-*   **Homeowner:** Logs in as *John Doe* (`homeowner@smartnest.ai`, password: `password`). Accesses device controls, booking sheets, and energy simulations.
-*   **Technician:** Logs in as *Alex Smith* (`tech@smartnest.ai`, password: `password`). Accesses mounting checklists, diagnostic note uploads, and job checkouts.
-*   **Administrator:** Logs in as *Sarah Jenkins* (`admin@smartnest.ai`, password: `password`). Accesses user directories, package prices, and dispatch assignments.
-
-*Note: Completing jobs as a Technician automatically provisions smart deadbolts and bridges into the corresponding Homeowner's device directory.*
-
----
-
-## 📁 System Folder Structure
-
-```
-├── public/                 # Static SVGs, icon layers
-├── src/
-│   ├── app/                # Next.js Pages & REST API routes
-│   │   ├── api/chat/       # Gemini AI router (with fallback mock loops)
-│   │   ├── auth/           # Login, Signup, Forgot reset
-│   │   ├── admin/          # Admin KPI & table matrices
-│   │   ├── appointments/   # Installations booking sheets
-│   │   ├── dashboard/      # Homeowner analytics charts
-│   │   ├── devices/        # Telemetry toggles, delete & add
-│   │   ├── maintenance/    # Predictive warning cards, tech checkout logs
-│   │   ├── ai-assistant/   # Conversational Chat Console
-│   │   ├── profile/        # Credentials edit forms, SMS alerts toggles
-│   │   └── technician/     # Technician onsite checklists & diagnostic uploads
-│   ├── components/         # Dashboard layout sidebar & TopNav switchers
-│   └── context/            # Global AppContext database state
-```
+* Core Framework: Next.js 15 (App Router), React 19, TypeScript
+* Styling and Animations: TailwindCSS (v4), Framer Motion
+* Analytics and Charts: Recharts
+* Form and Schema Validation: React Hook Form, Zod, Hookform Resolvers
+* AI Integration: Google Gemini SDK (@google/generative-ai)
+* State and Persistence: Global React Context with localStorage caching
 
 ---
 
-## 📄 Technical System Documentation
-For deep-dive architecture layouts, database ER diagrams, API schemas, testing plans, and deployment checklists, view the [smartnest_system_documentation.md](file:///C:/Users/aksha/.gemini/antigravity-cli/brain/b7007bb2-eb94-415e-8331-892b1dfcf838/smartnest_system_documentation.md) artifact.
+## Installation and Local Running Guide
+
+1. Clone the repository to your local system.
+2. Install all package dependencies (utilizing legacy peer flags due to React 19 charting support):
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+3. Configure your API key. Create a file named `.env.local` in the project root:
+   ```env
+   GEMINI_API_KEY=your_actual_gemini_api_key
+   ```
+   Note: If the key is omitted or contains a template placeholder, the API route automatically transitions into an offline simulation fallback, serving smart mock answers so all features remain testable.
+4. Start the developer server:
+   ```bash
+   npm run dev
+   ```
+5. Open your browser and navigate to http://localhost:3000
+
+---
+
+## Quick Demo Login Personas
+
+To test the role-based coordination, log in using the demo quick-access buttons on the login screen or enter these credentials:
+* Homeowner Persona:
+  * Email: homeowner@smartnest.ai
+  * Password: password
+* Technician Persona:
+  * Email: tech@smartnest.ai
+  * Password: password
+* Administrator Persona:
+  * Email: admin@smartnest.ai
+  * Password: password
+
+---
+
+## AI Implementation and Workflow
+
+1. AI Smart Home Consultant Chatbot: Hosted under /api/ai/chat, the router communicates with Gemini 1.5 Flash. It parses the incoming conversation history, filters out initial system greetings (Gemini API requires chat history to begin with a user message), and generates contextual installation plans, pricing estimates, and energy payback projections.
+2. Fail-Safe Offline Fallback: If network drops occur, or if the API key is not configured, the endpoint handles the exception gracefully, returning detailed mock responses rather than returning system crash status codes.
+
+---
+
+## Testing and Quality Assurance
+
+* Functional End-to-End Tests: Verified key-action synchronization across roles (e.g. buying a package -> booking a setup -> technician checklist completion -> homeowner device registration).
+* UI and Responsiveness: Tested layouts across mobile, tablet, and desktop viewports using Chrome DevTools. Responsive flex layouts and conditional mobile drawer navigation are styled using Tailwind.
+* Form Validations: Handled input fields, login screens, profiles, and billing metrics utilizing React Hook Form paired with Zod schemas.
+* API Endpoint Tests: Validated POST requests, JSON parsers, and chat history payloads for /api/ai/chat.
