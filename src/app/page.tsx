@@ -114,7 +114,7 @@ export default function LandingPage() {
       a: "Our recommendation engine takes inputs about your home layout, family size, budget, and top priorities (e.g. security, energy efficiency, comfort). It runs these through a custom prompt architecture using Google's Gemini model to produce custom package recommendations, estimated installation costs, and specific monthly energy payback metrics."
     },
     {
-      q: "Does SmartNest AI require professional installation?",
+      q: "Does SmartNest require professional installation?",
       a: "The Starter package is optimized for easy self-installation. The Premium and Luxury packages include complete white-glove professional installation by certified technicians in our network. You can schedule, reschedule, and view checklists for your appointments directly inside the app."
     },
     {
@@ -137,9 +137,9 @@ export default function LandingPage() {
       {/* Header / Navbar */}
       <header className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-900/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center cursor-pointer">
+          <Link href="/" className="flex items-center cursor-pointer">
             <span className="text-lg font-bold text-white tracking-tight">SmartNest</span>
-          </div>
+          </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
             <a href="#features" className="hover:text-white transition-colors">Features</a>
@@ -181,7 +181,7 @@ export default function LandingPage() {
 
           {/* Subtitle */}
           <p className="text-lg text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
-            SmartNest AI merges predictive device maintenance, dynamic energy savings, 
+            SmartNest merges predictive device maintenance, dynamic energy savings, 
             and white-glove professional installation into a single, cohesive automation platform.
           </p>
 
@@ -493,9 +493,9 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-slate-900 bg-slate-950 py-8 mt-auto z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
-          <div className="flex items-center cursor-pointer">
+          <Link href="/" className="flex items-center cursor-pointer">
             <span className="text-sm font-bold text-white tracking-tight">SmartNest</span>
-          </div>
+          </Link>
           <p className="text-[11px] text-slate-500 font-medium">
             &copy; {new Date().getFullYear()} SmartNest. All rights reserved.
           </p>

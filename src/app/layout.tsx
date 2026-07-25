@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SmartNest AI - Intelligent Smart Home Platform",
+  title: "SmartNest - Intelligent Smart Home Platform",
   description: "Discover, install, and optimize your smart home environment with Gemini AI.",
 };
 

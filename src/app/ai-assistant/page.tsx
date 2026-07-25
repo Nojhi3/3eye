@@ -82,7 +82,7 @@ export default function AIAssistantPage() {
               </span>
               <h3 className="text-sm font-extrabold text-white">Suggested Prompts</h3>
               <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">
-                Click any prompt pill to quickly query the SmartNest AI model.
+                Click any prompt pill to quickly query the SmartNest model.
               </p>
             </div>
 
@@ -175,7 +175,7 @@ export default function AIAssistantPage() {
           <form onSubmit={handleFormSubmit} className="flex gap-3 pt-4 border-t border-slate-850">
             <input
               type="text"
-              placeholder="Ask SmartNest AI about budget fits, device alerts, or thermostat setback setups..."
+              placeholder="Ask SmartNest about budget fits, device alerts, or thermostat setback setups..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"

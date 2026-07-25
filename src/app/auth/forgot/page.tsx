@@ -25,11 +25,8 @@ export default function ForgotPasswordPage() {
       
       <div className="w-full max-w-md space-y-8 z-10">
         <div className="flex flex-col items-center text-center">
-          <Link href="/" className="flex items-center gap-2 mb-2 group">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-emerald-500 shadow-xl shadow-indigo-500/20">
-              <Sparkles className="h-5.5 w-5.5 text-white" />
-            </div>
-            <span className="text-xl font-bold text-white tracking-tight">SmartNest <span className="text-indigo-400">AI</span></span>
+          <Link href="/" className="flex items-center mb-2 group">
+            <span className="text-xl font-bold text-white tracking-tight">SmartNest</span>
           </Link>
           <h2 className="mt-4 text-2xl font-extrabold text-white tracking-tight">Reset password</h2>
           <p className="mt-1.5 text-sm text-slate-400">

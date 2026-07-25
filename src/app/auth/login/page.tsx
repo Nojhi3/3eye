@@ -86,11 +86,8 @@ export default function LoginPage() {
       <div className="w-full max-w-md space-y-8 z-10">
         {/* Brand logo header */}
         <div className="flex flex-col items-center text-center">
-          <Link href="/" className="flex items-center gap-2 mb-2 group">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-tr from-indigo-500 to-emerald-500 shadow-xl shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-              <Sparkles className="h-6 w-6 text-white animate-pulse" />
-            </div>
-            <span className="text-2xl font-bold text-white tracking-tight">SmartNest <span className="text-indigo-400">AI</span></span>
+          <Link href="/" className="flex items-center mb-2 group">
+            <span className="text-2xl font-bold text-white tracking-tight">SmartNest</span>
           </Link>
           <h2 className="mt-4 text-3xl font-extrabold text-white tracking-tight">Welcome back</h2>
           <p className="mt-1.5 text-sm text-slate-400">

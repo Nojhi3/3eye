@@ -107,14 +107,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 border-r border-slate-800 bg-slate-900/60 backdrop-blur-xl">
         <div className="flex flex-col flex-1 min-h-0">
           {/* Logo Section */}
-          <div className="flex items-center h-16 px-6 border-b border-slate-800 gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-emerald-500 shadow-lg shadow-indigo-500/25">
-              <Sparkles className="h-5 w-5 text-white" />
-            </div>
-            <div>
+          <div className="flex items-center h-16 px-6 border-b border-slate-800">
+            <Link href="/" className="flex items-center cursor-pointer">
               <span className="font-bold text-base tracking-tight text-white">SmartNest</span>
-              <span className="ml-1 text-xs font-semibold text-indigo-400 bg-indigo-500/10 px-1.5 py-0.5 rounded-md">AI</span>
-            </div>
+            </Link>
           </div>
 
           {/* Navigation Links */}
@@ -257,12 +253,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           />
           <div className="fixed inset-y-0 left-0 w-64 bg-slate-900 border-r border-slate-800 flex flex-col z-50">
             <div className="flex items-center justify-between h-16 px-6 border-b border-slate-800">
-              <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-indigo-500 to-emerald-500">
-                  <Sparkles className="h-4 w-4 text-white" />
-                </div>
+              <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center cursor-pointer">
                 <span className="font-bold text-base text-white tracking-tight">SmartNest</span>
-              </div>
+              </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"

@@ -190,7 +190,7 @@ export default function HomeownerDashboard() {
             </span>
             <h3 className="text-base font-extrabold text-white">Energy Optimizer</h3>
             <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-              Input your utility metrics. SmartNest AI calculates potential seasonal adjustments and payback durations.
+              Input your utility metrics. SmartNest calculates potential seasonal adjustments and payback durations.
             </p>
           </div>
 

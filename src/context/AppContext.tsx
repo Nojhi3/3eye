@@ -820,7 +820,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     return newReport;
   };
 
-  // Chat Operations
   const addChatMessage = (sender: "user" | "ai", text: string) => {
     const newMessage: ChatMessage = {
       id: `chat-${Date.now()}`,
@@ -828,7 +827,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       text,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
-    saveState("sn_chat", [...chatHistory, newMessage], setChatHistory);
+    setChatHistory((prev: ChatMessage[]) => {
+      const updated = [...prev, newMessage];
+      if (typeof window !== "undefined") {
+        localStorage.setItem("sn_chat", JSON.stringify(updated));
+      }
+      return updated;
+    });
   };
 
   const clearChat = () => {
