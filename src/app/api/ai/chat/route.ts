@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const SYSTEM_PROMPT = `
-You are the SmartNest AI home automation consultant. Your objective is to help homeowners discover, configure, install, and optimize smart devices.
+You are the SmartNest home automation consultant. Your objective is to help homeowners discover, configure, install, and optimize smart devices.
 
 When asked questions, follow these rules:
 1. Provide a professional, warm, and highly technical response.
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
       let responseText = "";
 
       if (promptLower.includes("budget") || promptLower.includes("package") || promptLower.includes("cost") || promptLower.includes("starter") || promptLower.includes("recommend")) {
-        responseText = `Based on your query, here is my **SmartNest AI Recommendation**:
+        responseText = `Based on your query, here is my **SmartNest Recommendation**:
 
 ### Recommended Suite: Premium Automation Package ($1,299)
 This package is our highest value option and represents the best fit for medium family homes.
@@ -49,7 +49,7 @@ This package is our highest value option and represents the best fit for medium 
 
 Would you like me to book our technician Alex Smith to mount this premium package for you?`;
       } else if (promptLower.includes("energy") || promptLower.includes("electric") || promptLower.includes("bill") || promptLower.includes("savings") || promptLower.includes("thermostat")) {
-        responseText = `Here is how we can optimize your energy load profile using **SmartNest AI Energy Insights**:
+        responseText = `Here is how we can optimize your energy load profile using **SmartNest Energy Insights**:
 
 *   **Thermostatic Setback:** We configure a 4°F setback (e.g. 78°F in summer cooling hours, 68°F in winter heating hours) during 'Away' statuses triggered by mobile geofencing. This shaves **15% off heating/cooling bills**.
 *   **Standby Shedding:** Placing smart plugs on home entertainment loops and standby appliances lets us auto-shutdown vampire loads between 12 AM and 6 AM.
@@ -73,7 +73,7 @@ Your **Yale Assure Lock 2** has flagged a battery level of **12%**.
 
 *Click the 'Dispatch Technician' button on your dashboard to schedule Alex Smith for immediate service.*`;
       } else {
-        responseText = `Hello! I am your SmartNest AI home automation consultant. 
+        responseText = `Hello! I am your SmartNest home automation consultant. 
 
 To help me tailor the perfect setup for you, could you tell me a bit more about:
 1.  What is your **house type** (Single Family, Apartment, or Condo) and number of **rooms**?

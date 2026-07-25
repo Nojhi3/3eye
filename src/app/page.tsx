@@ -208,7 +208,7 @@ export default function LandingPage() {
               <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/5 to-emerald-500/5 rounded-3xl pointer-events-none" />
               <div className="rounded-2xl border border-slate-850 overflow-hidden bg-slate-950 aspect-[16/9] relative group">
                 <img
-                  src="/dashboard_mockup.jpg"
+                  src="/image.png"
                   alt="SmartNest Operating Core Dashboard"
                   className="w-full h-full object-cover opacity-85 group-hover:scale-102 transition-transform duration-500"
                 />
