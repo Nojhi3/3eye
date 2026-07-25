@@ -100,13 +100,16 @@ export async function POST(req: Request) {
       systemInstruction: SYSTEM_PROMPT
     });
 
+    // Gemini SDK requires history to start with a 'user' message.
+    // We locate the first message sent by 'user' and slice the history starting from it.
+    const firstUserIndex = history.findIndex((h: any) => h.sender === "user");
+    const historyToUse = firstUserIndex !== -1 ? history.slice(firstUserIndex) : [];
+
     const chat = model.startChat({
-      history: history
-        ? history.map((h: any) => ({
-            role: h.sender === "user" ? "user" : "model",
-            parts: [{ text: h.text }]
-          }))
-        : []
+      history: historyToUse.map((h: any) => ({
+        role: h.sender === "user" ? "user" : "model",
+        parts: [{ text: h.text }]
+      }))
     });
 
     const result = await chat.sendMessage(message);
