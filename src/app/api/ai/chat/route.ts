@@ -18,23 +18,11 @@ When asked questions, follow these rules:
 5. Format your answers beautifully in clear markdown. Use bullets and bold text. Keep response length moderate (2-4 paragraphs max).
 `;
 
-export async function POST(req: Request) {
-  try {
-    const { message, history } = await req.json();
+function getFallbackResponseText(message: string): string {
+  const promptLower = message.toLowerCase();
 
-    if (!message) {
-      return NextResponse.json({ error: "Missing query message." }, { status: 400 });
-    }
-
-    const apiKey = process.env.GEMINI_API_KEY;
-
-    if (!apiKey) {
-      // SMART FALLBACK SIMULATION: If API Key is missing, generate high-fidelity response locally
-      const promptLower = message.toLowerCase();
-      let responseText = "";
-
-      if (promptLower.includes("budget") || promptLower.includes("package") || promptLower.includes("cost") || promptLower.includes("starter") || promptLower.includes("recommend")) {
-        responseText = `Based on your query, here is my **SmartNest Recommendation**:
+  if (promptLower.includes("budget") || promptLower.includes("package") || promptLower.includes("cost") || promptLower.includes("starter") || promptLower.includes("recommend")) {
+    return `Based on your query, here is my **SmartNest Recommendation**:
 
 ### Recommended Suite: Premium Automation Package ($1,299)
 This package is our highest value option and represents the best fit for medium family homes.
@@ -48,8 +36,8 @@ This package is our highest value option and represents the best fit for medium 
     3.  *Phase 3 (Day 2):* Configure motion-activated corridor lighting rules.
 
 Would you like me to book our technician Alex Smith to mount this premium package for you?`;
-      } else if (promptLower.includes("energy") || promptLower.includes("electric") || promptLower.includes("bill") || promptLower.includes("savings") || promptLower.includes("thermostat")) {
-        responseText = `Here is how we can optimize your energy load profile using **SmartNest Energy Insights**:
+  } else if (promptLower.includes("energy") || promptLower.includes("electric") || promptLower.includes("bill") || promptLower.includes("savings") || promptLower.includes("thermostat")) {
+    return `Here is how we can optimize your energy load profile using **SmartNest Energy Insights**:
 
 *   **Thermostatic Setback:** We configure a 4°F setback (e.g. 78°F in summer cooling hours, 68°F in winter heating hours) during 'Away' statuses triggered by mobile geofencing. This shaves **15% off heating/cooling bills**.
 *   **Standby Shedding:** Placing smart plugs on home entertainment loops and standby appliances lets us auto-shutdown vampire loads between 12 AM and 6 AM.
@@ -59,8 +47,8 @@ Would you like me to book our technician Alex Smith to mount this premium packag
 *   *Monthly Savings:* **$38.50** (based on average $180 baseline bills)
 *   *Annual Conservation:* **$462.00 / year**
 *   *Energy Score Increase:* Boosts your automation health score from **45 to 78 / 100**!`;
-      } else if (promptLower.includes("maintenance") || promptLower.includes("deadbolt") || promptLower.includes("lock") || promptLower.includes("battery") || promptLower.includes("warning")) {
-        responseText = `### ⚠️ AI Predictive Maintenance Diagnostics
+  } else if (promptLower.includes("maintenance") || promptLower.includes("deadbolt") || promptLower.includes("lock") || promptLower.includes("battery") || promptLower.includes("warning")) {
+    return `### ⚠️ AI Predictive Maintenance Diagnostics
 
 Your **Yale Assure Lock 2** has flagged a battery level of **12%**.
 
@@ -72,8 +60,8 @@ Your **Yale Assure Lock 2** has flagged a battery level of **12%**.
     3.  Verify connection parameters with the Phillips Hue bridge to prevent signal search loops.
 
 *Click the 'Dispatch Technician' button on your dashboard to schedule Alex Smith for immediate service.*`;
-      } else {
-        responseText = `Hello! I am your SmartNest home automation consultant. 
+  } else {
+    return `Hello! I am your SmartNest home automation consultant. 
 
 To help me tailor the perfect setup for you, could you tell me a bit more about:
 1.  What is your **house type** (Single Family, Apartment, or Condo) and number of **rooms**?
@@ -81,8 +69,25 @@ To help me tailor the perfect setup for you, could you tell me a bit more about:
 3.  What are your top **priorities**? (e.g., Security, Energy Savings, Comfort, or Luxury Automation)
 
 Once you provide these details, I can generate a tailored device recommendations catalog, monthly utility payback periods, and setup priorities.`;
-      }
+  }
+}
 
+export async function POST(req: Request) {
+  let message = "";
+  try {
+    const body = await req.json();
+    message = body.message || "";
+    const history = body.history || [];
+
+    if (!message) {
+      return NextResponse.json({ error: "Missing query message." }, { status: 400 });
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    const isPlaceholder = !apiKey || apiKey === "" || apiKey.includes("YourActualAPIKey") || apiKey.includes("placeholder");
+
+    if (isPlaceholder) {
+      const responseText = getFallbackResponseText(message);
       // Return simulated delay
       await new Promise((resolve) => setTimeout(resolve, 600));
       return NextResponse.json({ response: responseText });
@@ -110,9 +115,10 @@ Once you provide these details, I can generate a tailored device recommendations
     return NextResponse.json({ response: text });
   } catch (err: any) {
     console.error("AI API Error:", err);
-    return NextResponse.json(
-      { error: "Error communicating with AI engine: " + err.message },
-      { status: 500 }
-    );
+    // If Gemini fails due to bad key or network, return fallback gracefully instead of returning 500 error block
+    const fallbackText = getFallbackResponseText(message);
+    return NextResponse.json({
+      response: `*(Note: Simulated response since Gemini API key is inactive or offline)*\n\n${fallbackText}`
+    });
   }
 }
