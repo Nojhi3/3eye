@@ -247,6 +247,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   ];
 
   // Initialize DB with seed data if localStorage is empty
+  // This effect intentionally hydrates the client store from browser storage once.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUser = localStorage.getItem("sn_user");
@@ -478,9 +480,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       }
     }
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Save changes wrapper
-  const saveState = (key: string, data: any, stateSetter: Function) => {
+  const saveState = <T,>(
+    key: string,
+    data: T,
+    stateSetter: React.Dispatch<React.SetStateAction<T>>,
+  ) => {
     stateSetter(data);
     if (typeof window !== "undefined") {
       localStorage.setItem(key, JSON.stringify(data));
@@ -837,7 +844,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   };
 
   const clearChat = () => {
-    const initialChat = [
+    const initialChat: ChatMessage[] = [
       { id: "chat-1", sender: "ai" as const, text: "Hello! I am your IdeaForge Consultant. How can I help you discover, evaluate, and build your startup or manufacturing idea today?", timestamp: new Date().toLocaleTimeString() }
     ];
     saveState("sn_chat", initialChat, setChatHistory);
