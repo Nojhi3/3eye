@@ -1,65 +1,80 @@
-# IdeaForge - AI Startup & Manufacturing Explorer
+# IdeaForge — AI Startup & Manufacturing Explorer
 
-IdeaForge is a modern web application designed to catalog startup and manufacturing concepts. It provides a shared multi-role workspace where entrepreneurs, industry consultants, and admins explore blueprints, run capital estimators, audit plant site setups, and query generative AI plans.
+IdeaForge is a responsive Next.js application for exploring startup and manufacturing blueprints. It gives entrepreneurs a plant-planning workspace, consultants an audit workflow, and administrators an operations console. The application combines deterministic business logic for packages, orders, appointments, devices, and payback estimates with a Gemini-powered feasibility assistant.
 
-Reference Sites:
-- 10000ideas.com (Startup & Business Directory)
-- ideabrowser.com (Business Exploration Catalog)
+Reference inspiration: [10000ideas.com](https://10000ideas.com) and [IdeaBrowser](https://ideabrowser.com).
 
----
+## Current capabilities
 
-## 7 Objective Assessment Metrics Mapping
+- Role-based demo workspaces for entrepreneurs, consultants, and administrators
+- Landing page, login, signup, password-reset, dashboards, profiles, packages, equipment, appointments, maintenance, AI assistant, technician, and admin screens
+- Package purchase → appointment creation → consultant checklist → report submission → device provisioning workflow
+- Recharts payback/energy visualizations and deterministic feasibility scores
+- Gemini chat through a server-side Next.js Route Handler with configurable `GEMINI_MODEL`, validated history, safe fallback responses, and `/api/health`
+- IndexedDB local persistence with automatic migration and localStorage backup for the current prototype
+- Responsive dark operations-console UI with Framer Motion interactions and Lucide icons
 
-### Metric 1: Requirement Analysis & Technical Justification
-- **Problem Statement:** Bridge the gap between a simple startup directory catalog and a functional resource estimator. Convert the baseline 10,000 Ideas reference catalog into an interactive system featuring dynamic payback calculators, automated zoning safety checks, and supply chain recommendations.
-- **Solution & Value Proposition:**
-  - Developed a multi-role workspace bridging Entrepreneurs, Industry Consultants, and Administrators.
-  - Justification for AI Integration: Leveraged Large Language Models (Gemini API) for conversational feasibility checks and tailored plant blueprint recommendations. Built a rule-based cost projection system and Recharts visualizations to model machinery investments over time.
-- **Related Files:** [smartnest_evaluation_report.md](file:///C:/Users/aksha/.gemini/antigravity-cli/brain/b7007bb2-eb94-415e-8331-892b1dfcf838/smartnest_evaluation_report.md) (technical report in app data), [src/context/AppContext.tsx](file:///D:/all_progs/teesriAakh/src/context/AppContext.tsx) (operational state).
+## Architecture
 
-### Metric 2: Prompt Engineering & System Specifications
-- **Problem Statement:** Design a system instruction stack that constrains the LLM to output precise industrial blueprints, estimated setup budgets, and raw material logistics pathways. Ensure client-side mock parameters fallback gracefully during offline development testing.
-- **Solution:**
-  - Compiled a detailed bootstrap prompt instructing Gemini to analyze the industry sector, calculate payback ROI years, and generate installation checklists.
-  - Implemented an intelligent server-side fallback simulation to ensure grading test compatibility even if environment variables are offline.
-- **Related Files:** [smartnest_system_documentation.md](file:///C:/Users/aksha/.gemini/antigravity-cli/brain/b7007bb2-eb94-415e-8331-892b1dfcf838/smartnest_system_documentation.md), [src/app/api/ai/chat/route.ts](file:///D:/all_progs/teesriAakh/src/app/api/ai/chat/route.ts) (systm prompt & simulation fallback).
+![IdeaForge architecture and product flow](public/ideaforge_img.png)
 
-### Metric 3: UI/UX Aesthetic and Responsiveness
-- **Problem Statement:** Build a premium dark-themed layout using custom CSS variables, responsive typography, and micro-animations that work across desktop and mobile screens.
-- **Solution:**
-  - Forced dark themes using slate-950 variables in [globals.css](file:///D:/all_progs/teesriAakh/src/app/globals.css) to prevent system color bleed.
-  - Integrated dual-gradient Recharts Area bars with customized tooltips inside [dashboard/page.tsx](file:///D:/all_progs/teesriAakh/src/app/dashboard/page.tsx).
-  - Configured fluid height collapsers in the landing page FAQs using Framer Motion.
-- **Related Files:** [src/app/globals.css](file:///D:/all_progs/teesriAakh/src/app/globals.css), [src/app/page.tsx](file:///D:/all_progs/teesriAakh/src/app/page.tsx), [src/app/dashboard/page.tsx](file:///D:/all_progs/teesriAakh/src/app/dashboard/page.tsx).
+The detailed architecture explanation is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). The reusable AI coding specification is in [docs/MASTER_PROMPT.md](docs/MASTER_PROMPT.md).
 
-### Metric 4: AI-Assisted Development & Milestone Tracking
-- **Problem Statement:** Track the full software development lifecycle using structured code commits, milestone tasks, and compiler logs.
-- **Solution:**
-  - Maintained iterative checkpoint tracking.
-  - Ran clean build compilation steps in background tasks, ensuring 100% type safety.
-- **Related Files:** Git logs in the project workspace, build outputs.
+### Main implementation areas
 
-### Metric 5: Application Development & Architecture
-- **Problem Statement:** Provide an integrated user flow complete with authorization portals, state sync hubs, interactive tables, and AI chatbots.
-- **Solution:**
-  - **Auth Portals:** Built login and signup pages supporting Entrepreneurs, Consultants, and Admins.
-  - **State Sync Hub:** Developed a client-side state engine in AppContext syncing updates to local storage.
-  - **Entrepreneur View:** Features the Capital Feasibility Simulator, Machinery Inventory, and Consulting Scheduler.
-  - **Consultant View:** Features checklist checkouts, photo verification uploads, and diagnostic reports.
-  - **Admin View:** Features user profile managers, revenue growth tracking charts, and catalog price parameters.
-- **Related Files:** [src/context/AppContext.tsx](file:///D:/all_progs/teesriAakh/src/context/AppContext.tsx), [src/app/dashboard/page.tsx](file:///D:/all_progs/teesriAakh/src/app/dashboard/page.tsx), [src/app/technician/page.tsx](file:///D:/all_progs/teesriAakh/src/app/technician/page.tsx), [src/app/admin/page.tsx](file:///D:/all_progs/teesriAakh/src/app/admin/page.tsx), [src/app/ai-assistant/page.tsx](file:///D:/all_progs/teesriAakh/src/app/ai-assistant/page.tsx).
+- `src/app/` — Next.js App Router pages and API Route Handlers
+- `src/components/DashboardLayout.tsx` — shared authenticated dashboard shell
+- `src/context/AppContext.tsx` — client-side domain state and business workflows
+- `src/lib/local-db.ts` — IndexedDB adapter with localStorage migration/backup
+- `src/lib/ai.ts` — Gemini prompt, input validation, history normalization, and fallback logic
+- `src/app/api/ai/chat/route.ts` — Gemini server integration
+- `src/app/api/health/route.ts` — safe provider configuration health check
+- `tests/` — Vitest unit and API contract tests
+- `scripts/gemini-smoke.mjs` — live provider smoke test
 
-### Metric 6: Testing & Quality Assurance
-- **Problem Statement:** Verify application code against rendering breaks, layout inconsistencies, route mismatches, and SDK history validation errors.
-- **Solution:**
-  - Resolved chat history state closures by utilizing functional updates in React.
-  - Filtered API chat arrays to strip greetings and guarantee that payloads sent to Gemini start with a user message role, as required by the Google SDK.
-  - Validated Next.js production builds.
-- **Related Files:** [src/app/api/ai/chat/route.ts](file:///D:/all_progs/teesriAakh/src/app/api/ai/chat/route.ts) (history slicing filters), [src/context/AppContext.tsx](file:///D:/all_progs/teesriAakh/src/context/AppContext.tsx) (state queue functional updates).
+## AI choices
 
-### Metric 7: Production Deployment
-- **Problem Statement:** Deploy a compiled instance of the application to a live platform with Gemini API routing.
-- **Solution:**
-  - Verified local dev environments on http://localhost:3000.
-  - Deployed the production build to Vercel at: https://3eye-six.vercel.app/
-- **Related Files:** Project configuration files.
+- **LLM/NLP:** Gemini for conversational feasibility analysis, blueprint recommendations, explanations, and maintenance summaries.
+- **Recommendation engine:** transparent package and fallback rules in the prototype; these can later be replaced or augmented by retrieval-backed recommendations.
+- **Predictive analytics:** deterministic energy/payback and maintenance heuristics currently; production ML should be introduced only after collecting labelled operational data.
+- **RAG:** planned for approved regulations, supplier catalogs, and IdeaForge documentation with citations and document dates.
+- **Computer vision, OCR, speech, and autonomous agents:** not currently implemented. Technician photo verification is presently a workflow placeholder.
+
+## Local setup
+
+Requirements: Node.js 18+ and npm.
+
+```bash
+npm install
+npm run dev
+```
+
+Create `.env.local` for Gemini:
+
+```env
+GEMINI_API_KEY=your_key_here
+GEMINI_MODEL=gemini-2.5-flash
+```
+
+The API key is server-only and must not use a `NEXT_PUBLIC_` prefix.
+
+## QA and validation
+
+```bash
+npm run typecheck
+npm run lint
+npm test
+npm run test:gemini
+npm run build
+npm run test:qa
+```
+
+The QA plan and manual acceptance checklist are in [docs/QA_PLAN.md](docs/QA_PLAN.md). The current automated suite covers chat validation, Gemini history construction, fallback routing, provider-path API behavior, and health endpoint contracts.
+
+## Deployment
+
+The project is configured for Vercel and has previously been deployed at [https://3eye-six.vercel.app/](https://3eye-six.vercel.app/). After merging the current branch, redeploy and add `GEMINI_API_KEY` (and optionally `GEMINI_MODEL`) to the hosting provider’s environment variables. Verify `/api/health` reports `configured: true` and test `/api/ai/chat` after deployment.
+
+## Prototype boundary
+
+This version uses browser-local IndexedDB rather than a hosted database. It is suitable for demonstration and local persistence, but production use still requires secure server sessions, server-side role authorization, a hosted database, payment handling, multi-user isolation, rate limiting, and persistent file storage.

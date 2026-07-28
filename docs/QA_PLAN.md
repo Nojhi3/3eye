@@ -29,4 +29,4 @@ The Vitest suite covers chat input limits, history normalization, Gemini convers
 
 ## Known QA limitations
 
-The current application still uses localStorage for demo persistence, so multi-user isolation, secure sessions, database constraints, payment webhooks, and server-side role enforcement require a real backend before production use. Browser automation and Lighthouse should be added in CI after the deployment environment is made available to the test runner.
+The current application uses browser-local IndexedDB with a localStorage migration/backup path. Multi-user isolation, secure sessions, database constraints, payment webhooks, and server-side role enforcement require a hosted backend before production use. Browser automation and Lighthouse should be added in CI after the deployment environment is made available to the test runner.
