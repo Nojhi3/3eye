@@ -1,4 +1,12 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+const generateContent = vi.fn().mockResolvedValue({ text: "Gemini test response" });
+vi.mock("@google/genai", () => ({
+  GoogleGenAI: class {
+    models = { generateContent };
+  },
+}));
+
 import { GET } from "@/app/api/health/route";
 import { POST } from "@/app/api/ai/chat/route";
 
@@ -26,5 +34,22 @@ describe("AI chat route input contract", () => {
 
     expect(response.status).toBe(400);
     await expect(response.json()).resolves.toMatchObject({ error: expect.any(String) });
+  });
+
+  it("uses Gemini when a server key is configured", async () => {
+    process.env.GEMINI_API_KEY = "test-key";
+
+    const response = await POST(
+      new Request("http://localhost/api/ai/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: "Suggest a manufacturing blueprint", history: [] }),
+      }),
+    );
+    const body = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(body).toMatchObject({ response: "Gemini test response", mode: "gemini" });
+    expect(generateContent).toHaveBeenCalledOnce();
   });
 });
