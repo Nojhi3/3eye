@@ -103,16 +103,16 @@ export default function DevicesPage() {
         {/* Title Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-extrabold text-white tracking-tight">Connected Devices</h2>
+            <h2 className="text-2xl font-extrabold text-white tracking-tight">Machinery & Equipment Assets</h2>
             <p className="text-xs text-slate-400 font-medium">
-              Manage your home networks, review battery logs, and edit active automation nodes.
+              Manage your plant machinery, review raw material capacities, and calibrate active automation nodes.
             </p>
           </div>
           <button
             onClick={() => setShowAddModal(true)}
             className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition-all shadow-md active:scale-95 shrink-0"
           >
-            <Plus className="h-4 w-4" /> Add New Device
+            <Plus className="h-4 w-4" /> Provision Machinery
           </button>
         </div>
 
@@ -123,7 +123,7 @@ export default function DevicesPage() {
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
             <input
               type="text"
-              placeholder="Search devices by name, manufacturer, or placement..."
+              placeholder="Search machinery by name, brand, or floor section..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -143,7 +143,7 @@ export default function DevicesPage() {
                       : "text-slate-500 hover:text-slate-300"
                   }`}
                 >
-                  {cat}
+                  {cat === "climate" ? "Processing" : cat === "security" ? "Safety" : cat === "lighting" ? "Assembly" : cat === "bridge" ? "Controller" : "All"}
                 </button>
               ))}
             </div>
@@ -155,8 +155,8 @@ export default function DevicesPage() {
                 className="bg-slate-950 border border-slate-800 text-[10px] font-bold rounded-xl px-3 py-2 text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <option value="device_name">Sort: Name</option>
-                <option value="health">Sort: Health</option>
-                <option value="battery">Sort: Battery</option>
+                <option value="health">Sort: Calibration</option>
+                <option value="battery">Sort: Material Capacity</option>
               </select>
             </div>
           </div>
@@ -178,7 +178,7 @@ export default function DevicesPage() {
                     <div className="space-y-1">
                       <h3 className="text-sm font-extrabold text-white">{device.device_name}</h3>
                       <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-                        {device.manufacturer} • {device.category}
+                        {device.manufacturer} • {device.category === "climate" ? "Processing" : device.category === "security" ? "Safety" : device.category === "lighting" ? "Assembly" : device.category === "bridge" ? "Controller" : device.category}
                       </p>
                     </div>
                     {getStatusBadge(device.status)}
@@ -187,26 +187,26 @@ export default function DevicesPage() {
                   {/* Device Specs list */}
                   <div className="space-y-2.5 pt-2">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-500 font-medium">Placement:</span>
+                      <span className="text-slate-500 font-medium">Floor Zone:</span>
                       <span className="text-slate-300 font-semibold">{device.location}</span>
                     </div>
 
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-500 font-medium">Device Health:</span>
+                      <span className="text-slate-500 font-medium">Calibration Index:</span>
                       <span className={`font-semibold ${device.health > 85 ? "text-emerald-400" : "text-amber-400"}`}>
                         {device.health}%
                       </span>
                     </div>
 
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-500 font-medium">Power Cell:</span>
+                      <span className="text-slate-500 font-medium">Material Capacity:</span>
                       <span className={`px-2 py-0.5 rounded-lg border text-[10px] font-bold ${batData.color}`}>
-                        {batData.text}
+                        {device.battery === -1 ? "Continuous Feed" : `${device.battery}%`}
                       </span>
                     </div>
 
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-500 font-medium">Firmware:</span>
+                      <span className="text-slate-500 font-medium">Firmware Node:</span>
                       <span className="text-slate-400 font-mono text-[10px]">{device.firmware}</span>
                     </div>
                   </div>
@@ -227,7 +227,7 @@ export default function DevicesPage() {
 
                   <button
                     onClick={() => {
-                      if (confirm("Are you sure you want to delete this device?")) {
+                      if (confirm("Are you sure you want to decommission this machinery asset?")) {
                         deleteDevice(device.id);
                       }
                     }}
@@ -261,21 +261,21 @@ export default function DevicesPage() {
             </button>
 
             <div>
-              <h3 className="text-base font-extrabold text-white">Deploy Smart Appliance</h3>
+              <h3 className="text-base font-extrabold text-white">Provision Machinery Asset</h3>
               <p className="text-[11px] text-slate-400">
-                Register a new hardware component to the local home automation mesh.
+                Register a new hardware component to the factory manufacturing floor.
               </p>
             </div>
 
             <form onSubmit={handleAddDevice} className="space-y-4">
               <div>
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                  Device Name
+                  Asset Name
                 </label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Living Room Spotlight"
+                  placeholder="e.g. Injection Mold Extruder A"
                   value={newDeviceName}
                   onChange={(e) => setNewDeviceName(e.target.value)}
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4.5 py-2.5 text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -292,21 +292,21 @@ export default function DevicesPage() {
                     onChange={(e) => setNewCategory(e.target.value as Device["category"])}
                     className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   >
-                    <option value="lighting">Lighting</option>
-                    <option value="climate">Climate</option>
-                    <option value="security">Security</option>
-                    <option value="sensors">Sensors</option>
-                    <option value="bridge">Bridge</option>
+                    <option value="lighting">Assembly Line</option>
+                    <option value="climate">Processing</option>
+                    <option value="security">Safety</option>
+                    <option value="sensors">Quality Telemetry</option>
+                    <option value="bridge">Integration Controller</option>
                   </select>
                 </div>
                 <div>
                   <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                    Manufacturer
+                    Equipment Brand
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Philips Hue"
+                    placeholder="e.g. Creality or Haas"
                     value={newManufacturer}
                     onChange={(e) => setNewManufacturer(e.target.value)}
                     className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4.5 py-2.5 text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -316,12 +316,12 @@ export default function DevicesPage() {
 
               <div>
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                  Mesh Location / Room
+                  Floor Section / Zone
                 </label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Living Room"
+                  placeholder="e.g. Production Line B"
                   value={newLocation}
                   onChange={(e) => setNewLocation(e.target.value)}
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4.5 py-2.5 text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -331,7 +331,7 @@ export default function DevicesPage() {
               {newCategory !== "bridge" && newCategory !== "climate" && (
                 <div>
                   <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                    Initial Battery level (%)
+                    Initial Material Level (%)
                   </label>
                   <input
                     type="number"
@@ -348,7 +348,7 @@ export default function DevicesPage() {
                 type="submit"
                 className="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition-all shadow-md shadow-indigo-600/10 active:scale-95"
               >
-                Deploy to Mesh Node
+                Provision Machinery Node
               </button>
             </form>
           </div>

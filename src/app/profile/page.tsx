@@ -60,7 +60,7 @@ export default function ProfilePage() {
         <div>
           <h2 className="text-2xl font-extrabold text-white tracking-tight">Profile Details</h2>
           <p className="text-xs text-slate-400 font-medium">
-            Manage your personal contact credentials, physical address endpoints, and notifications preferences.
+            Manage your personal contact credentials, plant site endpoints, and notifications preferences.
           </p>
         </div>
 
@@ -133,35 +133,35 @@ export default function ProfilePage() {
           <div className="bg-slate-900/40 backdrop-blur-xl border border-slate-900 rounded-3xl p-6 space-y-6">
             <h3 className="text-base font-extrabold text-white flex items-center gap-2">
               <Home className="h-4.5 w-4.5 text-emerald-400" />
-              Physical Home Details
+              Plant Site Details
             </h3>
 
             <form onSubmit={handleHomeSave} className="space-y-4">
               {homeSuccess && (
                 <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold rounded-xl flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4" /> Physical Home parameters saved!
+                  <CheckCircle className="h-4 w-4" /> Plant site parameters saved!
                 </div>
               )}
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                    House Type
+                    Industry Sector
                   </label>
                   <select
                     value={houseType}
                     onChange={(e) => setHouseType(e.target.value)}
                     className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   >
-                    <option value="Single Family">Single Family</option>
-                    <option value="Apartment">Apartment</option>
-                    <option value="Condominium">Condominium</option>
-                    <option value="Townhouse">Townhouse</option>
+                    <option value="Single Family">CleanTech Manufacturing</option>
+                    <option value="Apartment">Tech & SaaS</option>
+                    <option value="Condominium">Consumer Goods</option>
+                    <option value="Townhouse">Food & Retail</option>
                   </select>
                 </div>
                 <div>
                   <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                    Rooms Count
+                    Operating Sections
                   </label>
                   <input
                     type="number"
@@ -175,14 +175,14 @@ export default function ProfilePage() {
 
               <div>
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                  Physical Address
+                  Plant Site Address
                 </label>
                 <input
                   type="text"
                   required
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  placeholder="e.g. 1248 Nesting Lane"
+                  placeholder="e.g. Plant Site B, Industrial Area 4"
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>

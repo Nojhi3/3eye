@@ -60,9 +60,9 @@ export default function LoginPage() {
 
   const handleQuickLogin = (role: "homeowner" | "technician" | "admin") => {
     setLoading(true);
-    let email = "homeowner@smartnest.ai";
-    if (role === "technician") email = "tech@smartnest.ai";
-    if (role === "admin") email = "admin@smartnest.ai";
+    let email = "entrepreneur@ideaforge.com";
+    if (role === "technician") email = "consultant@ideaforge.com";
+    if (role === "admin") email = "admin@ideaforge.com";
 
     setValue("email", email);
     setValue("password", "password");
@@ -87,11 +87,11 @@ export default function LoginPage() {
         {/* Brand logo header */}
         <div className="flex flex-col items-center text-center">
           <Link href="/" className="flex items-center mb-2 group">
-            <span className="text-2xl font-bold text-white tracking-tight">SmartNest</span>
+            <span className="text-2xl font-bold text-white tracking-tight">IdeaForge</span>
           </Link>
           <h2 className="mt-4 text-3xl font-extrabold text-white tracking-tight">Welcome back</h2>
           <p className="mt-1.5 text-sm text-slate-400">
-            Securely sign in to manage your automated home
+            Securely sign in to manage your startup blueprints
           </p>
         </div>
 
@@ -121,7 +121,7 @@ export default function LoginPage() {
                         : "text-slate-400 hover:text-slate-200 bg-transparent"
                     }`}
                   >
-                    {r}
+                    {r === "homeowner" ? "Entrepreneur" : r === "technician" ? "Consultant" : "Admin"}
                   </button>
                 ))}
               </div>
@@ -190,7 +190,7 @@ export default function LoginPage() {
               {loading ? (
                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
               ) : (
-                "Sign In to SmartNest"
+                "Sign In to IdeaForge"
               )}
             </button>
           </form>
@@ -206,14 +206,14 @@ export default function LoginPage() {
                 className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:bg-slate-900 hover:border-slate-700 transition-all text-center group"
               >
                 <User className="h-4 w-4 text-indigo-400 group-hover:scale-110 transition-transform" />
-                <span className="text-[10px] font-semibold text-slate-300">Homeowner</span>
+                <span className="text-[10px] font-semibold text-slate-300">Entrepreneur</span>
               </button>
               <button
                 onClick={() => handleQuickLogin("technician")}
                 className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-slate-950/60 border border-slate-800 hover:bg-slate-900 hover:border-slate-700 transition-all text-center group"
               >
                 <Wrench className="h-4 w-4 text-emerald-400 group-hover:scale-110 transition-transform" />
-                <span className="text-[10px] font-semibold text-slate-300">Technician</span>
+                <span className="text-[10px] font-semibold text-slate-300">Consultant</span>
               </button>
               <button
                 onClick={() => handleQuickLogin("admin")}

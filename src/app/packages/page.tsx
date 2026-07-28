@@ -11,22 +11,22 @@ export default function PackagesPage() {
   const handlePurchase = (id: string, name: string) => {
     const success = purchasePackage(id);
     if (success) {
-      alert(`Successfully purchased: ${name}! An installation appointment has been automatically scheduled for you in 2 days. View the Appointments page to see details.`);
+      alert(`Successfully provisioned: ${name}! A feasibility and setup consultation has been automatically scheduled for you in 2 days. View the Consulting page to see details.`);
     } else {
-      alert("Purchase failed. Please sign in again.");
+      alert("Selection failed. Please sign in again.");
     }
   };
 
   const comparisonRows = [
-    { spec: "Central Hub", starter: "Standard Bridge", premium: "Nest Pro Hub", luxury: "Nest Enterprise Hub" },
-    { spec: "Smart RGBW Bulbs", starter: "2 Included", premium: "4 Included + 2 Switches", luxury: "10 Included + 4 Switches" },
-    { spec: "AI Climate Thermostat", starter: "❌ No", premium: "1 Included (Multi-zone)", luxury: "2 Included (Climate Sync)" },
-    { spec: "Secure Deadbolt", starter: "❌ No", premium: "1 Included (Keypad)", luxury: "2 Included (Biometric)" },
-    { spec: "Video Surveillance", starter: "❌ No", premium: "Doorbell + 1 Outdoor Camera", luxury: "Doorbell Pro + 3 Floodlight Cameras" },
-    { spec: "Energy Metering", starter: "1 Smart Plug", premium: "Full Hub Dashboard", luxury: "Whole-Home Metering + Leak Valve" },
-    { spec: "Installation Services", starter: "Self-Install / Guidance", premium: "Professional Included", luxury: "Priority Professional Included" },
-    { spec: "Warranty", starter: "1 Year Limited", premium: "2 Year Full Coverage", luxury: "Lifetime Replacement" },
-    { spec: "AI Assistance Level", starter: "Basic Recommendations", premium: "Full Predictive Suite", luxury: "Priority Local & Scripted AI" }
+    { spec: "Integration Gateway", starter: "IdeaForge Bridge", premium: "IdeaForge Pro Gateway", luxury: "IdeaForge Enterprise Server" },
+    { spec: "Production Sensor Nodes", starter: "2 Included", premium: "4 Included + 2 Calibrators", luxury: "10 Included + 4 Calibrators" },
+    { spec: "AI Thermal Regulator", starter: "❌ No", premium: "1 Included (Auto-vent)", luxury: "2 Included (Venting & Cooling)" },
+    { spec: "Biometric Security", starter: "❌ No", premium: "1 Access Node (Keypad)", luxury: "2 Access Nodes (Biometrics)" },
+    { spec: "QC Surveillance", starter: "❌ No", premium: "1 HD Assembly Line Monitor", luxury: "1 QC 2K Monitor + 3 Floor Cams" },
+    { spec: "Resource Metering", starter: "1 Smart Switch", premium: "Full Production Dashboard", luxury: "Plant Grid Logger + Safety Valve" },
+    { spec: "Feasibility Consulting", starter: "Self-Assembly Guidance", premium: "Certified Setup Audit", luxury: "Priority On-Site Audits" },
+    { spec: "Equipment Warranty", starter: "1 Year Limited", premium: "2 Year Full Coverage", luxury: "Lifetime Replacement" },
+    { spec: "AI Architect Access", starter: "Basic Feasibility", premium: "Full Plant Diagnostics", luxury: "Custom Floor Automation Scripts" }
   ];
 
   return (
@@ -34,9 +34,9 @@ export default function PackagesPage() {
       <div className="space-y-8">
         {/* Page Title */}
         <div>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight">Automation Packages</h2>
+          <h2 className="text-2xl font-extrabold text-white tracking-tight">Machinery & Setup Catalog</h2>
           <p className="text-xs text-slate-400 font-medium">
-            Discover and purchase intelligent, pre-configured smart home suites with certified professional installation.
+            Discover and select startup templates and pre-configured industrial setup blueprints with certified expert audits.
           </p>
         </div>
 
@@ -84,7 +84,7 @@ export default function PackagesPage() {
                 <div className="pt-8">
                   {isPurchased ? (
                     <div className="w-full py-3.5 rounded-xl border border-emerald-500/20 bg-emerald-500/5 text-center text-xs font-bold text-emerald-400">
-                      Currently Active in Home
+                      Currently Active Blueprint
                     </div>
                   ) : (
                     <button
@@ -95,7 +95,7 @@ export default function PackagesPage() {
                           : "bg-slate-800 text-slate-200 hover:bg-slate-750 hover:text-white"
                       }`}
                     >
-                      Purchase Package
+                      Select Blueprint
                     </button>
                   )}
                 </div>

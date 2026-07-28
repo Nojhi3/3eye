@@ -12,10 +12,10 @@ export default function AIAssistantPage() {
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   const suggestedPrompts = [
-    "What smart home package matches my 3-room home and $1500 budget?",
-    "How can I set up thermostat schedules to lower my summer electric bills?",
-    "Review the predictive maintenance risks for my Yale Deadbolt battery.",
-    "Explain the payback period of the Luxury Smart Haven package."
+    "What manufacturing blueprint matches my eco-plastics idea and $1500 budget?",
+    "How can I set up heating schedules to lower my extruder power bills?",
+    "Review the calibration warnings for my plastic extruder & molder node.",
+    "Explain the payback ROI period of the Premium Setup package."
   ];
 
   // Scroll to bottom of chat
@@ -51,13 +51,13 @@ export default function AIAssistantPage() {
     } catch (err) {
       setLoading(false);
       // Fallback helper in case of network issues - gives an intelligent mockup reply
-      let mockReply = "Hello! I am simulating a response because the local API route is offline. Let me know if you would like me to explain packages or check device health warnings.";
-      if (textToSend.toLowerCase().includes("budget") || textToSend.toLowerCase().includes("package")) {
-        mockReply = "Based on your budget, I recommend the Premium Automation Package ($1,299). It includes a multi-zone thermostat which shaves roughly 20-28% off electric bills, plus security coverage with a Deadbolt keypad, Ring Video Doorbell, and an outdoor camera. Professional installation is fully included in the price!";
-      } else if (textToSend.toLowerCase().includes("thermostat") || textToSend.toLowerCase().includes("electric") || textToSend.toLowerCase().includes("bill")) {
-        mockReply = "To lower your bills: \n1. Enable ECO mode setbacks (78°F in summer, 68°F in winter) when geofencing marks you as 'Away'.\n2. Integrate smart blinds to lower active solar heat load during peak solar hours.\n3. Configure Philips Hue lighting bridges to dim 25% after 9 PM. This collectively lowers your monthly bills by an average of $38.50.";
-      } else if (textToSend.toLowerCase().includes("yale") || textToSend.toLowerCase().includes("lock") || textToSend.toLowerCase().includes("battery")) {
-        mockReply = "Your Yale Assure Lock 2 is reporting a critical battery capacity of 12%. The motor current draws indicate elevated friction. I recommend dispatching a technician to swap the 4x AA batteries and clean the lock latch gears. You can schedule this in the Appointments dashboard with one click!";
+      let mockReply = "Hello! I am simulating a response because the local API route is offline. Let me know if you would like me to explain blueprints or check machinery calibration warnings.";
+      if (textToSend.toLowerCase().includes("budget") || textToSend.toLowerCase().includes("package") || textToSend.toLowerCase().includes("blueprint")) {
+        mockReply = "Based on your budget, I recommend the Premium Setup Blueprint ($1,299). It includes an energy-efficient climate heat-venting module which shaves roughly 20-28% off processing power, plus facility safety controls like a deadbolt sensor, surveillance camera, and automated product counter. Setup audit by certified consultants is fully included!";
+      } else if (textToSend.toLowerCase().includes("extruder") || textToSend.toLowerCase().includes("power") || textToSend.toLowerCase().includes("bill") || textToSend.toLowerCase().includes("heat")) {
+        mockReply = "To optimize extruder energy use: \n1. Schedule automatic temp setbacks (eco cooling cycles) during off-shift hours.\n2. Calibrate conveyor speeds dynamically based on sensor supply flow parameters.\n3. Integrate auto-cutoff valves on main material feeder lines to prevent liquid spillages. This saves an average of $385/mo in waste and power.";
+      } else if (textToSend.toLowerCase().includes("calibration") || textToSend.toLowerCase().includes("warning") || textToSend.toLowerCase().includes("molder")) {
+        mockReply = "Your Plastic Extruder & Molder Node is reporting a low feed capacity warning of 12% and motor friction spikes. I recommend dispatching a consultant to realign screw shafts and refill feed hopper materials. You can schedule this feasibility audit in the Consulting Scheduler dashboard with one click!";
       }
       
       addChatMessage("ai", mockReply);
@@ -78,11 +78,11 @@ export default function AIAssistantPage() {
             <div>
               <span className="inline-flex items-center gap-1 text-[10px] font-bold text-indigo-400 uppercase tracking-widest mb-1.5">
                 <Sparkles className="h-3 w-3" />
-                Gemini AI Consultant
+                Gemini AI Startup Planner
               </span>
               <h3 className="text-sm font-extrabold text-white">Suggested Prompts</h3>
               <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">
-                Click any prompt pill to quickly query the SmartNest model.
+                Click any prompt pill to quickly query the IdeaForge model.
               </p>
             </div>
 
@@ -162,7 +162,7 @@ export default function AIAssistantPage() {
                     <span className="h-2 w-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: "0ms" }} />
                     <span className="h-2 w-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: "150ms" }} />
                     <span className="h-2 w-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: "300ms" }} />
-                    <span className="ml-1 text-[10px] text-slate-500 uppercase tracking-wider">SmartNest is thinking...</span>
+                    <span className="ml-1 text-[10px] text-slate-500 uppercase tracking-wider">IdeaForge is thinking...</span>
                   </div>
                 </div>
               </div>
@@ -175,7 +175,7 @@ export default function AIAssistantPage() {
           <form onSubmit={handleFormSubmit} className="flex gap-3 pt-4 border-t border-slate-850">
             <input
               type="text"
-              placeholder="Ask SmartNest about budget fits, device alerts, or thermostat setback setups..."
+              placeholder="Ask IdeaForge about blueprints, setup costs, or machinery calibration setbacks..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"

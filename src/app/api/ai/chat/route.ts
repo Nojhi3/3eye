@@ -2,73 +2,74 @@ import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const SYSTEM_PROMPT = `
-You are the SmartNest home automation consultant. Your objective is to help homeowners discover, configure, install, and optimize smart devices.
+You are the IdeaForge startup and manufacturing consultant. Your objective is to help entrepreneurs discover, configure, budget, and optimize startup ideas and manufacturing plants.
 
 When asked questions, follow these rules:
 1. Provide a professional, warm, and highly technical response.
-2. Ask clarification questions if needed: house type (single family, apartment), number of rooms, budget, family size, existing appliances, and main priorities (energy savings, security, comfort).
-3. Generate detailed automation packages recommendations:
-   - Starter Suite ($499): Hub, 2x bulbs, 1x energy plugs, motion sensor.
-   - Premium Suite ($1,299): Pro Hub, 4x bulbs, dimmer switches, multi-zone thermostat, video deadbolt, ring doorbell, camera. (Best value)
-   - Luxury Haven ($2,999): Enterprise Hub, 10x bulbs, multi-zone climate syncer, biometric deadbolts, doorbell pro, 3x cameras, whole-home energy meter, leak detector valve.
+2. Ask clarification questions if needed: industry sector (CleanTech, Tech, Retail, Food, SaaS), manufacturing complexity, budget limits, scale target, and primary business goals (fast payback, high margin, ESG compliance).
+3. Generate detailed blueprint packages recommendations:
+   - Eco-Friendly Manufacturing Blueprint ($499): IdeaForge Central Controller, 2x Production Line Sensor Nodes (Temperature/Throughput), 1x Automated Equipment Relay Switch, 1x Quality Assurance Telemetry Sensor.
+   - Premium Manufacturing Setup ($1,299): IdeaForge Central Controller (Pro Edition), 4x Production Sensors & 2x Automated Calibrators, 1x AI Climate & Temperature Heat Venting Module, 1x High-Definition Assembly Line Monitor Cam, 1x Central Safety Shut-off Control Gateway.
+   - Luxury Smart Plant Integration ($2,999): IdeaForge Central Gateway (Enterprise, offline redundant), 10x Production Line Sensors & 4x Calibrators, 2x AI Smart Thermal Regulators (Venting & Cooling), 2x Biometric Facility Entrance Access Nodes, 1x 2K Quality Inspection Monitor Camera, 3x Assembly Monitor cams, 1x Whole-Plant Grid Power Optimizer Logger, 1x Automated Safety Shut-off Material Feed Valve.
 4. Calculate and clearly lay out:
-   - Estimated monthly savings ($30 - $80 depending on bill).
-   - Payback period in years (e.g. 2-3 years).
-   - Priority of implementation (e.g. Phase 1: Security deadbolt, Phase 2: Climate setback, Phase 3: Ambient scenes).
+   - Estimated initial capital requirements.
+   - Expected raw materials supply chain.
+   - ROI period in years (e.g. 2-3 years).
+   - Step-by-step startup checks (e.g., Phase 1: Zoning & permits, Phase 2: Controller sync, Phase 3: Calibrating lines).
 5. Format your answers beautifully in clear markdown. Use bullets and bold text. Keep response length moderate (2-4 paragraphs max).
 `;
 
 function getFallbackResponseText(message: string): string {
   const promptLower = message.toLowerCase();
 
-  if (promptLower.includes("budget") || promptLower.includes("package") || promptLower.includes("cost") || promptLower.includes("starter") || promptLower.includes("recommend")) {
-    return `Based on your query, here is my **SmartNest Recommendation**:
+  if (promptLower.includes("budget") || promptLower.includes("package") || promptLower.includes("cost") || promptLower.includes("starter") || promptLower.includes("recommend") || promptLower.includes("blueprint")) {
+    return `Based on your query, here is my **IdeaForge Recommendation**:
 
-### Recommended Suite: Premium Automation Package ($1,299)
-This package is our highest value option and represents the best fit for medium family homes.
+### Recommended Suite: Premium Setup Blueprint ($1,299)
+This package is our highest value option and represents the best fit for medium scale plants or custom packaging assembly.
 
-*   **Included Hardware:** SmartNest Pro Hub, 4x RGBW Energy Bulbs, Smart Thermostat (Multi-zone), Yale Deadbolt with keypad, Ring Doorbell Camera, and 1x Outdoor Floodlight.
-*   **Monthly Savings Forecast:** ~$38.50 / month on cooling and active standby loads.
+*   **Included Hardware:** IdeaForge Pro Gateway, 4x Production Sensors, 2x Calibrators, 1x Heat Venting Module, 1x HD Assembly Line Monitor, and 1x Safety Gateway.
+*   **Monthly Operating Savings Forecast:** ~$385.00 / month on processing efficiency and standby loads.
 *   **Estimated Return on Investment:** 2.8 Year payback period.
 *   **Implementation Priority:**
-    1.  *Phase 1 (Day 1):* Mount Yale Deadbolt and Ring Doorbell to lock structural entrypoints.
-    2.  *Phase 2 (Day 1):* Calibrate Nest Thermostat and link to central Zigbee bridge.
-    3.  *Phase 3 (Day 2):* Configure motion-activated corridor lighting rules.
+    1.  *Phase 1 (Day 1):* Set up central IdeaForge controller and link to security gateways.
+    2.  *Phase 2 (Day 1):* Wire and calibrate high-temperature production sensors on line A.
+    3.  *Phase 3 (Day 2):* Configure conveyor speed parameters for automated inventory count matching.
 
-Would you like me to book our technician Alex Smith to mount this premium package for you?`;
-  } else if (promptLower.includes("energy") || promptLower.includes("electric") || promptLower.includes("bill") || promptLower.includes("savings") || promptLower.includes("thermostat")) {
-    return `Here is how we can optimize your energy load profile using **SmartNest Energy Insights**:
+Would you like me to book our consultant Alex Smith to map this premium setup blueprint for you?`;
+  } else if (promptLower.includes("energy") || promptLower.includes("electric") || promptLower.includes("bill") || promptLower.includes("savings") || promptLower.includes("extruder") || promptLower.includes("power") || promptLower.includes("heat")) {
+    return `Here is how we can optimize your plant resource profile using **IdeaForge Feasibility Insights**:
 
-*   **Thermostatic Setback:** We configure a 4°F setback (e.g. 78°F in summer cooling hours, 68°F in winter heating hours) during 'Away' statuses triggered by mobile geofencing. This shaves **15% off heating/cooling bills**.
-*   **Standby Shedding:** Placing smart plugs on home entertainment loops and standby appliances lets us auto-shutdown vampire loads between 12 AM and 6 AM.
-*   **Ambient Dims:** Setting Phillips Hue lightbars to dim to 40% after 9 PM saves bulb lifespan and lowers bulb energy consumption.
+*   **Extruder Thermal Setback:** We configure a automatic eco setback cycle (lowering extruder temperatures during off-shift hours). This shaves **15% off processing power usage**.
+*   **Dynamic Conveyor matching:** Calibrating motor speed cycles with sensor supply load data shuts down conveyor belts under low input states.
+*   **Safety cutoffs:** Placing automatic shut-off valves on raw chemical hoppers avoids spill leakage waste.
 
 **Predicted Financial Metrics:**
-*   *Monthly Savings:* **$38.50** (based on average $180 baseline bills)
-*   *Annual Conservation:* **$462.00 / year**
-*   *Energy Score Increase:* Boosts your automation health score from **45 to 78 / 100**!`;
-  } else if (promptLower.includes("maintenance") || promptLower.includes("deadbolt") || promptLower.includes("lock") || promptLower.includes("battery") || promptLower.includes("warning")) {
-    return `### ⚠️ AI Predictive Maintenance Diagnostics
+*   *Monthly Savings:* **$385.00** (based on average baseline utility costs)
+*   *Annual Conservation:* **$4,620.00 / year**
+*   *Feasibility Score Increase:* Boosts your automation index score from **45 to 78 / 100**!`;
+  } else if (promptLower.includes("maintenance") || promptLower.includes("warning") || promptLower.includes("calibration") || promptLower.includes("extruder") || promptLower.includes("molder") || promptLower.includes("capacity")) {
+    return `### ⚠️ AI Feasibility & Calibration Warnings
 
-Your **Yale Assure Lock 2** has flagged a battery level of **12%**.
+Your **Plastic Extruder & Molder Node** has flagged a feed level of **12%**.
 
-*   **Failure Forecast:** The AI predicts complete motor depletion around **August 5th** (in roughly 12 days).
-*   **Reasoning:** Battery cells are under 1.1V and latch diagnostics indicate mechanical friction inside the lock strike plate, causing the motor to pull twice the normal baseline current.
+*   **Failure Forecast:** The AI predicts extruder feed depletion around **August 5th** (in roughly 12 days).
+*   **Reasoning:** Hopper levels are under 15% and extruder motor load indicators show mechanical friction spikes inside screw feeder shafts, causing the system to draw elevated current.
 *   **AI Recommendations:**
-    1.  Swap all 4x AA batteries with new alkaline cells immediately.
-    2.  Spray dry PTFE lubricant on latch friction plates.
-    3.  Verify connection parameters with the Phillips Hue bridge to prevent signal search loops.
+    1.  Refill hopper materials immediately to prevent dry run screw wear.
+    2.  Spray high-temperature lubricant on feed screw gears.
+    3.  Verify network parameters with the plant integration gateway to clear warning alerts.
 
-*Click the 'Dispatch Technician' button on your dashboard to schedule Alex Smith for immediate service.*`;
+*Click the 'Book New Audit' button on your dashboard to schedule Alex Smith for immediate calibration help.*`;
   } else {
-    return `Hello! I am your SmartNest home automation consultant. 
+    return `Hello! I am your IdeaForge startup and manufacturing consultant. 
 
 To help me tailor the perfect setup for you, could you tell me a bit more about:
-1.  What is your **house type** (Single Family, Apartment, or Condo) and number of **rooms**?
+1.  What is your **industry sector** (CleanTech, Tech, Food, Retail, SaaS) and scale target?
 2.  What is your **ideal budget** range?
-3.  What are your top **priorities**? (e.g., Security, Energy Savings, Comfort, or Luxury Automation)
+3.  What are your top **priorities**? (e.g., ESG Compliance, Operating Margins, Startup Cost, or Complete Automation)
 
-Once you provide these details, I can generate a tailored device recommendations catalog, monthly utility payback periods, and setup priorities.`;
+Once you provide these details, I can generate a tailored device recommendations catalog, ROI payback periods, and implementation checklists.`;
   }
 }
 

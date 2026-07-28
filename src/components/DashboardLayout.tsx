@@ -55,29 +55,29 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   // Navigation config based on user role
   const homeownerNavigation = [
     { name: "Overview Dashboard", href: "/dashboard", icon: Home },
-    { name: "Automation Packages", href: "/packages", icon: Layers },
-    { name: "Device Management", href: "/devices", icon: Cpu },
-    { name: "Appointments & Setup", href: "/appointments", icon: Calendar },
-    { name: "Predictive Maintenance", href: "/maintenance", icon: Wrench },
-    { name: "AI Nest Consultant", href: "/ai-assistant", icon: Bot },
-    { name: "My Profile Details", href: "/profile", icon: User }
+    { name: "Machinery Catalog", href: "/packages", icon: Layers },
+    { name: "Plant Machinery", href: "/devices", icon: Cpu },
+    { name: "Consulting Scheduler", href: "/appointments", icon: Calendar },
+    { name: "Feasibility Diagnostics", href: "/maintenance", icon: Wrench },
+    { name: "AI Startup Planner", href: "/ai-assistant", icon: Bot },
+    { name: "Owner Profile", href: "/profile", icon: User }
   ];
 
   const technicianNavigation = [
-    { name: "Technician Jobs", href: "/technician", icon: Activity },
-    { name: "Predictive Maintenance", href: "/maintenance", icon: Wrench },
-    { name: "AI Nest Consultant", href: "/ai-assistant", icon: Bot },
-    { name: "My Profile Details", href: "/profile", icon: User }
+    { name: "Consultant Portfolio", href: "/technician", icon: Activity },
+    { name: "Feasibility Diagnostics", href: "/maintenance", icon: Wrench },
+    { name: "AI Startup Planner", href: "/ai-assistant", icon: Bot },
+    { name: "Consultant Profile", href: "/profile", icon: User }
   ];
 
   const adminNavigation = [
     { name: "Admin Dashboard", href: "/admin", icon: Shield },
-    { name: "Automation Packages", href: "/packages", icon: Layers },
-    { name: "Device Directory", href: "/devices", icon: Cpu },
-    { name: "Appointment logs", href: "/appointments", icon: Calendar },
-    { name: "Predictive Maintenance", href: "/maintenance", icon: Wrench },
-    { name: "AI Nest Consultant", href: "/ai-assistant", icon: Bot },
-    { name: "Admin Profile", href: "/profile", icon: User }
+    { name: "Machinery Catalog", href: "/packages", icon: Layers },
+    { name: "Global Equipment Roster", href: "/devices", icon: Cpu },
+    { name: "Consultation Schedules", href: "/appointments", icon: Calendar },
+    { name: "System Diagnostics", href: "/maintenance", icon: Wrench },
+    { name: "AI Startup Planner", href: "/ai-assistant", icon: Bot },
+    { name: "Admin Settings", href: "/profile", icon: User }
   ];
 
   const navigation =
@@ -109,7 +109,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           {/* Logo Section */}
           <div className="flex items-center h-16 px-6 border-b border-slate-800">
             <Link href="/" className="flex items-center cursor-pointer">
-              <span className="font-bold text-base tracking-tight text-white">SmartNest</span>
+              <span className="font-bold text-base tracking-tight text-white">IdeaForge</span>
             </Link>
           </div>
 
@@ -146,7 +146,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white truncate">{user.name}</p>
-                <p className="text-xs text-slate-500 capitalize truncate">{user.role}</p>
+                <p className="text-xs text-slate-500 capitalize truncate">
+                  {user.role === "homeowner" ? "Entrepreneur" : user.role === "technician" ? "Consultant" : "Admin"}
+                </p>
               </div>
               <button
                 onClick={() => logout()}
@@ -185,7 +187,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200 hover:bg-slate-800 hover:border-slate-700 transition-colors"
               >
                 <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Role: <span className="text-indigo-400 capitalize">{user.role}</span></span>
+                <span>Role: <span className="text-indigo-400 capitalize">
+                  {user.role === "homeowner" ? "Entrepreneur" : user.role === "technician" ? "Consultant" : "Admin"}
+                </span></span>
                 <ChevronDown className="h-3 w-3 text-slate-400" />
               </button>
 
@@ -207,7 +211,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                           : "text-slate-300 hover:bg-slate-800 hover:text-white"
                       }`}
                     >
-                      Homeowner (John Doe)
+                      Entrepreneur (John Doe)
                     </button>
                     <button
                       onClick={() => handleRoleChange("technician")}
@@ -217,7 +221,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                           : "text-slate-300 hover:bg-slate-800 hover:text-white"
                       }`}
                     >
-                      Technician (Alex Smith)
+                      Consultant (Alex Smith)
                     </button>
                     <button
                       onClick={() => handleRoleChange("admin")}
@@ -254,7 +258,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <div className="fixed inset-y-0 left-0 w-64 bg-slate-900 border-r border-slate-800 flex flex-col z-50">
             <div className="flex items-center justify-between h-16 px-6 border-b border-slate-800">
               <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center cursor-pointer">
-                <span className="font-bold text-base text-white tracking-tight">SmartNest</span>
+                <span className="font-bold text-base text-white tracking-tight">IdeaForge</span>
               </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}
@@ -292,7 +296,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-semibold text-white truncate">{user.name}</p>
-                  <p className="text-[10px] text-slate-500 capitalize truncate">{user.role}</p>
+                  <p className="text-[10px] text-slate-500 capitalize truncate">
+                    {user.role === "homeowner" ? "Entrepreneur" : user.role === "technician" ? "Consultant" : "Admin"}
+                  </p>
                 </div>
                 <button
                   onClick={() => {

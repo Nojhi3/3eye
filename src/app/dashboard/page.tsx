@@ -89,15 +89,15 @@ export default function HomeownerDashboard() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-extrabold text-white tracking-tight">
-            Welcome home, {user?.name || "Homeowner"}
+            Welcome back, {user?.name || "Entrepreneur"}
           </h2>
           <p className="text-xs text-slate-400 font-medium">
-            Your smart home network is active. Energy efficiency is currently optimized.
+            Your startup planning grid is active. Production feasibility analytics are loaded.
           </p>
         </div>
         <div className="flex items-center gap-2 text-xs font-bold bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 px-3.5 py-2 rounded-xl">
           <Sparkles className="h-4 w-4 text-indigo-400 animate-pulse" />
-          <span>SmartNest Engine: Active</span>
+          <span>IdeaForge Engine: Active</span>
         </div>
       </div>
 
@@ -109,7 +109,7 @@ export default function HomeownerDashboard() {
             <Zap className="h-16 w-16" />
           </div>
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-            Energy Savings
+            Estimated Monthly Savings
           </span>
           <div className="flex items-baseline gap-1.5 mb-1 text-white">
             <span className="text-3xl font-extrabold">${energySavedCost}</span>
@@ -117,7 +117,7 @@ export default function HomeownerDashboard() {
           </div>
           <p className="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
             <TrendingUp className="h-3.5 w-3.5" />
-            {energySavedKwh} kWh conserved
+            {energySavedKwh} units optimized
           </p>
         </div>
 
@@ -127,7 +127,7 @@ export default function HomeownerDashboard() {
             <Cpu className="h-16 w-16" />
           </div>
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-            Devices Installed
+            Machinery Assets Installed
           </span>
           <div className="flex items-baseline gap-1.5 mb-1 text-white">
             <span className="text-3xl font-extrabold">{userDevices.length}</span>
@@ -144,16 +144,16 @@ export default function HomeownerDashboard() {
             <Calendar className="h-16 w-16" />
           </div>
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-            Appointments
+            Consultations
           </span>
           <div className="flex items-baseline gap-1.5 mb-1 text-white">
             <span className="text-3xl font-extrabold">{activeApts.length}</span>
-            <span className="text-xs font-semibold text-slate-500">Pending Setup</span>
+            <span className="text-xs font-semibold text-slate-500">Pending Audits</span>
           </div>
           <p className="text-[11px] text-slate-400 font-semibold truncate">
             {activeApts.length > 0
-              ? `Next: ${activeApts[0].appointment_date}`
-              : "No upcoming visits"}
+              ? `Next Audit: ${activeApts[0].appointment_date}`
+              : "No scheduled audits"}
           </p>
         </div>
 
@@ -163,18 +163,18 @@ export default function HomeownerDashboard() {
             <Wrench className="h-16 w-16" />
           </div>
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
-            Maintenance Alerts
+            Material Warnings
           </span>
           <div className="flex items-baseline gap-1.5 mb-1 text-white">
             <span className={`text-3xl font-extrabold ${warningDevices.length > 0 ? "text-amber-500" : "text-white"}`}>
               {warningDevices.length}
             </span>
-            <span className="text-xs font-semibold text-slate-500">Attention Needed</span>
+            <span className="text-xs font-semibold text-slate-500">Attention Required</span>
           </div>
           <p className="text-[11px] text-slate-400 font-semibold">
             {warningDevices.length > 0
-              ? `${warningDevices[0].device_name} battery low`
-              : "All hardware is healthy"}
+              ? `${warningDevices[0].device_name} capacity low`
+              : "All machinery is active"}
           </p>
         </div>
       </div>
@@ -188,16 +188,16 @@ export default function HomeownerDashboard() {
               <Zap className="h-3 w-3" />
               AI Simulation
             </span>
-            <h3 className="text-base font-extrabold text-white">Energy Optimizer</h3>
+            <h3 className="text-base font-extrabold text-white">Factory Feasibility Planner</h3>
             <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-              Input your utility metrics. SmartNest calculates potential seasonal adjustments and payback durations.
+              Input your target setup metrics. IdeaForge calculates capital allocation, resource projections, and ROI paybacks.
             </p>
           </div>
 
           <form onSubmit={handleOptimize} className="space-y-4">
             <div>
               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                Monthly Utility Cost ($)
+                Target Capital Budget ($)
               </label>
               <input
                 type="number"
@@ -208,7 +208,7 @@ export default function HomeownerDashboard() {
             </div>
             <div>
               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                Number of Heavy Appliances
+                Machinery Modules Count
               </label>
               <input
                 type="number"
@@ -219,7 +219,7 @@ export default function HomeownerDashboard() {
             </div>
             <div>
               <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                Avg. Daily Active Hours / Appliance
+                Avg. Daily Floor Operating Hours
               </label>
               <input
                 type="number"
@@ -237,7 +237,7 @@ export default function HomeownerDashboard() {
               {optimizationLoading ? (
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
               ) : (
-                "Optimize Utility Load"
+                "Run Feasibility Simulator"
               )}
             </button>
           </form>
@@ -247,7 +247,7 @@ export default function HomeownerDashboard() {
             <div className="pt-4 border-t border-slate-800/80 grid grid-cols-2 gap-4">
               <div className="p-3 bg-slate-950 rounded-xl border border-slate-850">
                 <span className="text-[9px] font-bold text-slate-500 uppercase block mb-1">
-                  Est. Annual Saved
+                  Est. Annual Savings
                 </span>
                 <span className="text-base font-extrabold text-emerald-400">
                   ${activeReport.energy_prediction.annualSavings}
@@ -255,7 +255,7 @@ export default function HomeownerDashboard() {
               </div>
               <div className="p-3 bg-slate-950 rounded-xl border border-slate-850">
                 <span className="text-[9px] font-bold text-slate-500 uppercase block mb-1">
-                  Payback Period
+                  Payback ROI Period
                 </span>
                 <span className="text-base font-extrabold text-white">
                   {activeReport.energy_prediction.paybackYears} Years
@@ -269,14 +269,14 @@ export default function HomeownerDashboard() {
         <div className="lg:col-span-2 bg-slate-900/40 backdrop-blur-xl border border-slate-900 rounded-3xl p-6 flex flex-col space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-extrabold text-white">Savings Projection</h3>
+              <h3 className="text-base font-extrabold text-white">Capital Payback Projections</h3>
               <p className="text-xs text-slate-400 mt-0.5">
-                Comparison of energy expenditure before and after AI automation.
+                Comparison of resource layout expenses before and after plant optimization.
               </p>
             </div>
             <div className="flex gap-4 text-[10px] font-bold text-slate-400">
-              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-indigo-500" /> Before</span>
-              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-emerald-500" /> Optimized</span>
+              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-indigo-500" /> Unoptimized Setup</span>
+              <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-emerald-500" /> Optimized Plant</span>
             </div>
           </div>
 
@@ -301,8 +301,8 @@ export default function HomeownerDashboard() {
                   labelStyle={{ fontWeight: "bold", fontSize: "11px", color: "#f8fafc" }}
                   itemStyle={{ fontSize: "11px" }}
                 />
-                <Bar dataKey="before" fill="url(#barBefore)" radius={[4, 4, 0, 0]} name="Before Automation ($)" />
-                <Bar dataKey="after" fill="url(#barAfter)" radius={[4, 4, 0, 0]} name="Optimized Nest ($)" />
+                <Bar dataKey="before" fill="url(#barBefore)" radius={[4, 4, 0, 0]} name="Unoptimized Setup ($)" />
+                <Bar dataKey="after" fill="url(#barAfter)" radius={[4, 4, 0, 0]} name="Optimized Plant ($)" />
               </BarChart>
             </ResponsiveContainer>
           </div>

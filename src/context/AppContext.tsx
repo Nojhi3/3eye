@@ -125,25 +125,25 @@ interface AppContextType {
   signUp: (name: string, email: string, phone: string, role: User["role"]) => void;
   updateProfile: (name: string, phone: string) => void;
 
-  // Homes
+  // Homes (Project Plants)
   homes: Home[];
   activeHome: Home | null;
   registerHome: (home: Omit<Home, "id" | "user_id">) => void;
   updateHome: (home: Home) => void;
 
-  // Devices
+  // Devices (Machinery)
   devices: Device[];
   addDevice: (device: Omit<Device, "id">) => void;
   updateDevice: (device: Device) => void;
   deleteDevice: (deviceId: string) => void;
   toggleDevice: (deviceId: string) => void;
 
-  // Packages & Orders
+  // Packages & Orders (Blueprints)
   packages: Package[];
   orders: Order[];
   purchasePackage: (packageId: string) => boolean;
 
-  // Appointments
+  // Appointments (Consultations)
   appointments: Appointment[];
   bookAppointment: (technicianId: string, date: string, timeSlot: string, description: string, packageId?: string) => void;
   cancelAppointment: (id: string) => void;
@@ -151,10 +151,10 @@ interface AppContextType {
   updateAppointmentStatus: (id: string, status: Appointment["status"]) => void;
   updateAppointmentChecklist: (id: string, checklist: Appointment["checklist"]) => void;
 
-  // Technicians
+  // Technicians (Consultants)
   technicians: User[];
 
-  // Maintenance
+  // Maintenance (Audits)
   maintenanceLogs: Maintenance[];
   addMaintenanceLog: (log: Omit<Maintenance, "id" | "service_date">) => void;
 
@@ -175,54 +175,53 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-// SEED DATA
+// SEED DATA: Refactored to represent Startup and Manufacturing Blueprints
 const defaultPackages: Package[] = [
   {
     id: "starter",
-    name: "Starter Nest Package",
-    description: "Ideal for apartments or small condos to begin your smart home journey.",
+    name: "Eco-Friendly Manufacturing Blueprint",
+    description: "Ideal for small operations in recycled goods, organic packaging, or bio-plastics.",
     price: 499,
     features: [
-      "SmartNest Central Bridge",
-      "2x Smart Energy Bulbs (RGBW)",
-      "1x Smart Power Plug with energy monitoring",
-      "1x Smart Motion Sensor",
-      "Basic AI energy optimization recommendations",
-      "Self-installation or remote technician guidance"
+      "IdeaForge Central Controller",
+      "2x Production Line Sensor Nodes (Temperature/Throughput)",
+      "1x Automated Equipment Relay Switch",
+      "1x Quality Assurance Telemetry Sensor",
+      "AI financial payback & operational efficiency audit",
+      "Self-implementation or remote consultant walkthrough"
     ]
   },
   {
     id: "premium",
-    name: "Premium Automation Package",
-    description: "The most popular suite of devices for single-family homes seeking safety and efficiency.",
+    name: "Premium Manufacturing Setup",
+    description: "Our most popular setup for automated custom packaging or local assembly plants.",
     price: 1299,
     features: [
-      "SmartNest Central Bridge (Pro)",
-      "4x Smart Energy Bulbs & 2x Dimmer Switches",
-      "1x AI Smart Thermostat (Multi-zone support)",
-      "1x Secure Smart Deadbolt with keypad",
-      "1x Video Doorbell (1080p HD, AI motion alerts)",
-      "1x Outdoor Security Camera",
-      "Full AI energy & safety insights dashboard",
-      "Professional technician installation included"
+      "IdeaForge Central Controller (Pro Edition)",
+      "4x Production Sensors & 2x Automated Calibrators",
+      "1x AI Climate & Temperature Heat Venting Module",
+      "1x High-Definition Assembly Line Monitor Cam",
+      "1x Central Safety Shut-off Control Gateway",
+      "Full AI metrics & raw materials supply insights",
+      "Professional expert consultant setup included"
     ]
   },
   {
     id: "luxury",
-    name: "Luxury Smart Haven",
-    description: "Enterprise-grade automation and safety configuration for complete peace of mind.",
+    name: "Luxury Smart Plant Integration",
+    description: "Enterprise-grade complete machinery integration and production-flow automation.",
     price: 2999,
     features: [
-      "SmartNest Central Bridge (Enterprise, offline backup)",
-      "10x Smart Energy Bulbs & 4x Smart Dimmer Switches",
-      "2x AI Smart Thermostats (Multi-zone climate sync)",
-      "2x Secure Smart Deadbolts (Biometric / Keyless)",
-      "1x Video Doorbell Pro (2K HDR, face recognition)",
-      "3x Indoor/Outdoor Floodlight Cameras",
-      "1x Whole-Home Smart Energy Metering system",
-      "1x Smart Water Shut-off Valve (Leak detector)",
-      "Priority Technician support & lifetime warranty",
-      "Custom routine scripting & voice control setup"
+      "IdeaForge Central Gateway (Enterprise, offline redundant)",
+      "10x Production Line Sensors & 4x Calibrators",
+      "2x AI Smart Thermal Regulators (Venting & Cooling)",
+      "2x Biometric Facility Entrance Access Nodes",
+      "1x 2K Quality Inspection Monitor Camera",
+      "3x Assembly Monitor cams for floor managers",
+      "1x Whole-Plant Grid Power Optimizer Logger",
+      "1x Automated Safety Shut-off Material Feed Valve",
+      "Priority expert assistance & lifetime layout warranty",
+      "Custom floor script automations & scale modules"
     ]
   }
 ];
@@ -240,11 +239,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [aiReports, setAiReports] = useState<AIReport[]>([]);
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
 
-  // Simulated Technicians (available for booking/assignments)
+  // Simulated Consultants
   const technicians: User[] = [
-    { id: "tech-1", name: "Alex Smith", email: "tech1@smartnest.ai", role: "technician", phone: "+1 (512) 555-0192", created_at: "2025-01-10" },
-    { id: "tech-2", name: "Jordan Brooks", email: "tech2@smartnest.ai", role: "technician", phone: "+1 (512) 555-0143", created_at: "2025-03-22" },
-    { id: "tech-3", name: "Elena Rostova", email: "tech3@smartnest.ai", role: "technician", phone: "+1 (512) 555-0177", created_at: "2025-05-18" }
+    { id: "tech-1", name: "Alex Smith", email: "tech1@ideaforge.com", role: "technician", phone: "+1 (512) 555-0192", created_at: "2025-01-10" },
+    { id: "tech-2", name: "Jordan Brooks", email: "tech2@ideaforge.com", role: "technician", phone: "+1 (512) 555-0143", created_at: "2025-03-22" },
+    { id: "tech-3", name: "Elena Rostova", email: "tech3@ideaforge.com", role: "technician", phone: "+1 (512) 555-0177", created_at: "2025-05-18" }
   ];
 
   // Initialize DB with seed data if localStorage is empty
@@ -265,13 +264,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       else {
         const seedHome: Home = {
           id: "home-1",
-          user_id: "user-1", // John Doe (Homeowner)
-          house_type: "Single Family",
+          user_id: "user-1", // John Doe (Entrepreneur)
+          house_type: "CleanTech Manufacturing",
           rooms: 5,
-          address: "1248 Nesting Lane",
+          address: "Plant Site B, Industrial Area 4",
           city: "Austin",
           state: "TX",
-          zipcode: "78704"
+          zipcode: "78744"
         };
         setHomes([seedHome]);
         localStorage.setItem("sn_homes", JSON.stringify([seedHome]));
@@ -283,15 +282,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           {
             id: "dev-1",
             home_id: "home-1",
-            device_name: "Ecobee Smart Thermostat",
+            device_name: "Custom 3D Printer Farm Array",
             category: "climate",
-            manufacturer: "Ecobee",
+            manufacturer: "Creality",
             status: "active",
             battery: -1, // Wired
             firmware: "v4.7.12",
             health: 98,
             last_service: "2026-04-12",
-            location: "Living Room hallway",
+            location: "Section A - Material Processing",
             warranty_expires: "2027-10-15",
             age_months: 18,
             value: 249
@@ -299,15 +298,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           {
             id: "dev-2",
             home_id: "home-1",
-            device_name: "Yale Assure Lock 2",
+            device_name: "Plastic Extruder & Molder Node",
             category: "security",
-            manufacturer: "Yale",
-            status: "warning", // Warning status
-            battery: 12, // Needs replacement soon!
+            manufacturer: "IdeaForge",
+            status: "warning",
+            battery: 12, // Material Level: 12%
             firmware: "v1.18.2",
             health: 84,
             last_service: "2026-03-01",
-            location: "Front Door",
+            location: "Section B - Injection Molding",
             warranty_expires: "2026-11-20",
             age_months: 20,
             value: 220
@@ -315,15 +314,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           {
             id: "dev-3",
             home_id: "home-1",
-            device_name: "Ring Video Doorbell Pro 2",
+            device_name: "CNC Laser Cutter & Engraver",
             category: "security",
-            manufacturer: "Ring",
+            manufacturer: "IdeaForge",
             status: "active",
             battery: 88,
             firmware: "v5.2.1",
             health: 95,
             last_service: "2026-02-15",
-            location: "Front Porch",
+            location: "Section C - Cutting",
             warranty_expires: "2027-02-15",
             age_months: 12,
             value: 250
@@ -331,15 +330,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           {
             id: "dev-4",
             home_id: "home-1",
-            device_name: "Philips Hue Bridge",
+            device_name: "Plant Integration Gateway",
             category: "bridge",
-            manufacturer: "Philips",
+            manufacturer: "IdeaForge",
             status: "active",
-            battery: -1, // Wired
+            battery: -1,
             firmware: "v1.55.0",
             health: 100,
             last_service: "2026-05-10",
-            location: "Network Closet",
+            location: "Main Office - Central Server",
             warranty_expires: "2028-05-10",
             age_months: 2,
             value: 60
@@ -347,15 +346,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           {
             id: "dev-5",
             home_id: "home-1",
-            device_name: "Hue Living Room Lightbar",
+            device_name: "Assembly Conveyor Belt Node",
             category: "lighting",
-            manufacturer: "Philips",
+            manufacturer: "IdeaForge",
             status: "active",
-            battery: -1, // Wired
+            battery: -1,
             firmware: "v1.55.2",
             health: 99,
             last_service: "2026-05-10",
-            location: "Living Room",
+            location: "Section D - Assembly",
             warranty_expires: "2028-05-10",
             age_months: 2,
             value: 80
@@ -394,13 +393,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             appointment_date: "2026-07-26",
             time_slot: "09:00 AM - 12:00 PM",
             status: "scheduled",
-            description: "Install & calibrate Outdoor Smart Cameras and set up automated routines.",
-            address: "1248 Nesting Lane, Austin, TX 78704",
+            description: "Assess factory floor layout, calibrate sensor arrays, and verify material supply lines.",
+            address: "Plant Site B, Industrial Area 4, Austin, TX 78744",
             checklist: [
-              { item: "Mount front garage outdoor floodlight camera", done: false },
-              { item: "Wire power to backyard pathway sensor bridge", done: false },
-              { item: "Configure Zigbee network signals across hallways", done: false },
-              { item: "Train homeowner on the SmartNest local app", done: false }
+              { item: "Zoning registration & legal startup paperwork approval", done: false },
+              { item: "Set up and sync plant integration gateway controller", done: false },
+              { item: "Calibrate high-temperature plastic extruder molding strike", done: false },
+              { item: "Train plant operator on the IdeaForge dashboard tracking", done: false }
             ]
           }
         ];
@@ -414,10 +413,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           {
             id: "maint-1",
             device_id: "dev-2",
-            device_name: "Yale Assure Lock 2",
+            device_name: "Plastic Extruder & Molder Node",
             technician_id: "tech-1",
             technician_name: "Alex Smith",
-            report: "Cleaned internal gears and recalibrated lock strike plate. Checked connection to Nest Central Bridge. Updated firmware to v1.18.2. Reminded customer that batteries will need replacement in roughly 3 months.",
+            report: "Realigned screw feeder shafts and recalibrated strike plate. Checked connection to gateway hub. Updated firmware. Notified customer that extruder nozzle tip will need replacement in roughly 3 months due to wear.",
             service_date: "2026-03-01",
             next_service: "2026-09-01"
           }
@@ -431,7 +430,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         const seedReport: AIReport = {
           id: "rep-1",
           user_id: "user-1",
-          recommendation: "Increase smart lighting automations and replace lock batteries.",
+          recommendation: "Optimize extruder idle periods to conserve power, and replace worn nozzles to prevent lines down.",
           energy_prediction: {
             monthlySavings: 38.5,
             annualSavings: 462.0,
@@ -448,19 +447,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
               { month: "Jun", before: 240, after: 185 }
             ],
             recommendedAutomations: [
-              "Schedule thermostat setback from 8 AM to 5 PM (-15% heating/cooling bills)",
-              "Configure Motion-activated lights in garages and corridors to auto-turnoff after 2 minutes",
-              "Install Smart Blinds on south-facing windows to lower active cooling costs during peak sunlight"
+              "Schedule automatic extruder temperature setbacks during off-shift hours (saves $120/mo)",
+              "Calibrate conveyer speed cycles with sensor throughput to lower motor load under low supply",
+              "Install auto-cutoff safety valve on main chemical raw material container lines to prevent spill leakage"
             ]
           },
           maintenance_prediction: [
             {
               deviceId: "dev-2",
-              deviceName: "Yale Assure Lock 2",
+              deviceName: "Plastic Extruder & Molder Node",
               failureProbability: 92,
               predictedFailureDate: "2026-08-05",
-              reason: "Battery capacity under 15% and motor drawing elevated current.",
-              recommendation: "Replace 4x AA batteries immediately. Clean latch friction surfaces."
+              reason: "Feed material capacity under 15% and extruder motor drawing elevated current.",
+              recommendation: "Refill raw materials immediately. Calibrate shaft bearings and clean gears."
             }
           ],
           created_at: "2026-07-20"
@@ -472,7 +471,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       if (storedChat) setChatHistory(JSON.parse(storedChat));
       else {
         const seedChat: ChatMessage[] = [
-          { id: "chat-1", sender: "ai", text: "Hello! I am your SmartNest AI Consultant. How can I help you automate and secure your home today?", timestamp: new Date().toLocaleTimeString() }
+          { id: "chat-1", sender: "ai", text: "Hello! I am your IdeaForge Consultant. How can I help you discover, evaluate, and build your startup or manufacturing idea today?", timestamp: new Date().toLocaleTimeString() }
         ];
         setChatHistory(seedChat);
         localStorage.setItem("sn_chat", JSON.stringify(seedChat));
@@ -492,11 +491,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const login = (email: string, role: User["role"]): boolean => {
     let dummyUser: User;
     if (email.includes("admin") || role === "admin") {
-      dummyUser = { id: "user-admin", name: "Sarah Jenkins", email: email || "admin@smartnest.ai", role: "admin", phone: "+1 (512) 555-0901", created_at: "2026-01-01" };
+      dummyUser = { id: "user-admin", name: "Sarah Jenkins", email: email || "admin@ideaforge.com", role: "admin", phone: "+1 (512) 555-0901", created_at: "2026-01-01" };
     } else if (email.includes("tech") || role === "technician") {
-      dummyUser = { id: "tech-1", name: "Alex Smith", email: email || "tech@smartnest.ai", role: "technician", phone: "+1 (512) 555-0192", created_at: "2026-01-10" };
+      dummyUser = { id: "tech-1", name: "Alex Smith", email: email || "consultant@ideaforge.com", role: "technician", phone: "+1 (512) 555-0192", created_at: "2026-01-10" };
     } else {
-      dummyUser = { id: "user-1", name: "John Doe", email: email || "homeowner@smartnest.ai", role: "homeowner", phone: "+1 (512) 555-0100", created_at: "2026-02-01" };
+      dummyUser = { id: "user-1", name: "John Doe", email: email || "entrepreneur@ideaforge.com", role: "homeowner", phone: "+1 (512) 555-0100", created_at: "2026-02-01" };
     }
     setUser(dummyUser);
     if (typeof window !== "undefined") {
@@ -526,14 +525,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem("sn_user", JSON.stringify(newUser));
     }
     
-    // Create matching initial home if homeowner
+    // Create matching initial home if entrepreneur (homeowner role internally)
     if (role === "homeowner") {
       const newHome: Home = {
         id: `home-${Date.now()}`,
         user_id: newUser.id,
-        house_type: "Single Family",
+        house_type: "CleanTech Manufacturing",
         rooms: 4,
-        address: "Enter Address",
+        address: "Enter Factory Site Address",
         city: "City",
         state: "State",
         zipcode: "00000"
@@ -569,7 +568,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     saveState("sn_homes", newHomes, setHomes);
   };
 
-  // Devices Operations
+  // Devices Operations (Machinery)
   const addDevice = (deviceData: Omit<Device, "id">) => {
     const newDevice: Device = {
       ...deviceData,
@@ -616,7 +615,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     };
     saveState("sn_orders", [newOrder, ...orders], setOrders);
 
-    // Auto-create booking for installation
+    // Auto-create booking for setup audit
     const techIdx = Math.floor(Math.random() * technicians.length);
     const tech = technicians[techIdx];
     const newApt: Appointment = {
@@ -629,7 +628,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       time_slot: "01:00 PM - 04:00 PM",
       status: "scheduled",
       package_id: packageId,
-      description: `Installation of SmartNest ${pkg.name}. Professional setup of smart systems, configuration of routines and optimization algorithms.`,
+      description: `Feasibility study and system setup for manufacturing blueprint ${pkg.name}. Deployment of production control modules and sensor telemetry.`,
       address: activeHome ? `${activeHome.address}, ${activeHome.city}, ${activeHome.state} ${activeHome.zipcode}` : "Register a home to proceed",
       checklist: pkg.features.map(feat => ({ item: `Install / configure: ${feat.slice(0, 50)}...`, done: false }))
     };
@@ -652,12 +651,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       status: "scheduled",
       description,
       package_id: packageId,
-      address: activeHome ? `${activeHome.address}, ${activeHome.city}, ${activeHome.state} ${activeHome.zipcode}` : "Main Home Address",
+      address: activeHome ? `${activeHome.address}, ${activeHome.city}, ${activeHome.state} ${activeHome.zipcode}` : "Main Plant Site B",
       checklist: [
         { item: "Initial hardware assessment", done: false },
         { item: "Device deployment and installation", done: false },
-        { item: "Firmware setup & hub sync", done: false },
-        { item: "Post-install safety and energy audit", done: false }
+        { item: "Firmware setup & gateway sync", done: false },
+        { item: "Post-install safety and efficiency audit", done: false }
       ]
     };
     saveState("sn_appointments", [newApt, ...appointments], setAppointments);
@@ -694,15 +693,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             {
               id: `dev-pkg-1-${Date.now()}`,
               home_id: homeId,
-              device_name: `${pkg.name.split(" ")[0]} Hub Controller`,
+              device_name: `${pkg.name.split(" ")[0]} Gateway Hub`,
               category: "bridge",
-              manufacturer: "SmartNest",
+              manufacturer: "IdeaForge",
               status: "active",
               battery: -1,
               firmware: "v5.0.0",
               health: 100,
               last_service: apt.appointment_date,
-              location: "Main hallway",
+              location: "Section A - Central",
               warranty_expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
               age_months: 0,
               value: pkg.price * 0.25
@@ -710,15 +709,15 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             {
               id: `dev-pkg-2-${Date.now()}`,
               home_id: homeId,
-              device_name: "SmartNest Secure Deadbolt",
+              device_name: "IdeaForge QC Calibrator",
               category: "security",
-              manufacturer: "SmartNest",
+              manufacturer: "IdeaForge",
               status: "active",
               battery: 100,
               firmware: "v2.0.1",
               health: 100,
               last_service: apt.appointment_date,
-              location: "Front Door",
+              location: "Section B - Outflow",
               warranty_expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
               age_months: 0,
               value: 199
@@ -744,12 +743,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     };
     saveState("sn_maintenance", [newLog, ...maintenanceLogs], setMaintenanceLogs);
 
-    // Also update device last service date and restore battery/health
+    // Also update device last service date and restore battery/health (material capacity)
     const updatedDevices = devices.map(d => {
       if (d.id === logData.device_id) {
         return {
           ...d,
-          battery: d.battery === -1 ? -1 : 100, // Refilled battery
+          battery: d.battery === -1 ? -1 : 100, // Refilled capacity
           health: 100, // Restored health
           status: "active" as const, // Cleared warning
           last_service: newLog.service_date
@@ -781,12 +780,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     ];
 
     const recommendedAutomations = [
-      `Set Smart Thermostat ECO mode during peak rate hours (expected savings: $${Math.round(monthlySavings * 0.4)}/mo)`,
-      `Configure Smart Bulbs to dim 25% after 9 PM (expected savings: $${Math.round(monthlySavings * 0.15)}/mo)`,
-      `Add Smart Outlets with automatic load shedding for standby appliances (expected savings: $${Math.round(monthlySavings * 0.15)}/mo)`
+      `Schedule automatic extruder temperature setbacks during off-shift hours (expected savings: $${Math.round(monthlySavings * 0.4)}/mo)`,
+      `Calibrate conveyer speed cycles with sensor throughput to lower motor load under low supply (expected savings: $${Math.round(monthlySavings * 0.15)}/mo)`,
+      `Install auto-cutoff safety valve on main chemical raw material container lines to prevent spill leakage (expected savings: $${Math.round(monthlySavings * 0.15)}/mo)`
     ];
 
-    // Predict warnings based on device age or battery
+    // Predict warnings based on device age or battery (capacity level)
     const predictions = devices
       .filter(d => d.battery > 0 && d.battery < 30 || d.health < 90)
       .map(d => ({
@@ -794,14 +793,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         deviceName: d.device_name,
         failureProbability: d.battery > 0 && d.battery < 15 ? 95 : 75,
         predictedFailureDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-        reason: d.battery < 15 ? "Critical battery state" : "Device firmware outdated & health index low.",
-        recommendation: d.battery < 15 ? "Schedule routine battery replacement." : "Reflash firmware and reset device controller."
+        reason: d.battery < 15 ? "Critical raw material capacity state" : "Device firmware outdated & health index low.",
+        recommendation: d.battery < 15 ? "Refill chemical container immediately." : "Reflash firmware and reset device controller."
       }));
 
     const newReport: AIReport = {
       id: `rep-${Date.now()}`,
       user_id: user.id,
-      recommendation: `Recommended implementation: Deploy a SmartNest Premium Package to lower heating/cooling loads. Configure schedules for ${appliances} appliances.`,
+      recommendation: `Recommended implementation: Deploy a Premium Setup Package to optimize heating/cooling loads. Configure schedules for ${appliances} machinery sections.`,
       energy_prediction: {
         monthlySavings,
         annualSavings,
@@ -820,6 +819,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     return newReport;
   };
 
+  // Chat Operations
   const addChatMessage = (sender: "user" | "ai", text: string) => {
     const newMessage: ChatMessage = {
       id: `chat-${Date.now()}`,
@@ -838,7 +838,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const clearChat = () => {
     const initialChat = [
-      { id: "chat-1", sender: "ai" as const, text: "Hello! I am your SmartNest AI Consultant. How can I help you automate and secure your home today?", timestamp: new Date().toLocaleTimeString() }
+      { id: "chat-1", sender: "ai" as const, text: "Hello! I am your IdeaForge Consultant. How can I help you discover, evaluate, and build your startup or manufacturing idea today?", timestamp: new Date().toLocaleTimeString() }
     ];
     saveState("sn_chat", initialChat, setChatHistory);
   };

@@ -90,9 +90,9 @@ export default function AppointmentsPage() {
         {/* Header Title */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-extrabold text-white tracking-tight">Appointments & Setup</h2>
+            <h2 className="text-2xl font-extrabold text-white tracking-tight">Consultation & Setup Audits</h2>
             <p className="text-xs text-slate-400 font-medium">
-              Schedule smart home hardware configuration audits and request certified technician repair dispatches.
+              Schedule a feasibility consultation or plant floor calibration audit with our expert industry consultants.
             </p>
           </div>
 
@@ -100,13 +100,13 @@ export default function AppointmentsPage() {
             onClick={() => setShowBookModal(true)}
             className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition-all shadow-md active:scale-95 shrink-0"
           >
-            <Plus className="h-4 w-4" /> Book New Setup
+            <Plus className="h-4 w-4" /> Book New Audit
           </button>
         </div>
 
         {/* Active Appointments Grid */}
         <div className="space-y-4">
-          <h3 className="text-base font-extrabold text-white">Active Appointments</h3>
+          <h3 className="text-base font-extrabold text-white">Active Setup Audits & Consultations</h3>
           
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             {activeApts.map((apt) => (
@@ -118,7 +118,7 @@ export default function AppointmentsPage() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-slate-400">Order Ref: {apt.id.slice(0, 8)}</span>
+                      <span className="text-xs font-bold text-slate-400">Audit Ref: {apt.id.slice(0, 8)}</span>
                       {getStatusBadge(apt.status)}
                     </div>
                     <p className="text-sm font-extrabold text-white">{apt.description}</p>
@@ -137,11 +137,11 @@ export default function AppointmentsPage() {
                   </div>
                   <div className="flex items-center gap-2 text-slate-300">
                     <User className="h-4 w-4 text-emerald-400 shrink-0" />
-                    <span>Technician: {apt.technician_name}</span>
+                    <span>Consultant: {apt.technician_name}</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-300 col-span-2">
                     <MapPin className="h-4 w-4 text-indigo-400 shrink-0" />
-                    <span className="truncate">{apt.address}</span>
+                    <span className="truncate">Factory Site: {apt.address}</span>
                   </div>
                 </div>
 
@@ -149,7 +149,7 @@ export default function AppointmentsPage() {
                 {apt.checklist && apt.checklist.length > 0 && (
                   <div className="bg-slate-950 p-4 rounded-2xl border border-slate-850 space-y-2">
                     <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider block">
-                      Installation checklist
+                      Calibration Checklist
                     </span>
                     <ul className="space-y-1.5">
                       {apt.checklist.map((c, i) => (
@@ -182,7 +182,7 @@ export default function AppointmentsPage() {
                     }}
                     className="flex-1 py-2.5 rounded-xl border border-rose-500/10 bg-rose-500/5 hover:bg-rose-500/10 text-[10px] font-bold text-rose-400 transition-all"
                   >
-                    Cancel Setup
+                    Cancel Audit
                   </button>
                 </div>
               </div>
@@ -191,7 +191,7 @@ export default function AppointmentsPage() {
             {activeApts.length === 0 && (
               <div className="col-span-full py-12 text-center bg-slate-900/10 border border-dashed border-slate-900 rounded-3xl">
                 <AlertTriangle className="h-8 w-8 text-slate-600 mx-auto mb-2" />
-                <p className="text-xs text-slate-500 font-semibold">No active scheduled installations.</p>
+                <p className="text-xs text-slate-500 font-semibold">No active scheduled consultations or audits.</p>
               </div>
             )}
           </div>
@@ -199,7 +199,7 @@ export default function AppointmentsPage() {
 
         {/* History / Past Installations list */}
         <div className="space-y-4">
-          <h3 className="text-base font-extrabold text-white">Past Installations</h3>
+          <h3 className="text-base font-extrabold text-white">Completed Consultations & Audits</h3>
 
           <div className="bg-slate-900/40 border border-slate-900 rounded-3xl overflow-hidden">
             <div className="overflow-x-auto">
@@ -207,7 +207,7 @@ export default function AppointmentsPage() {
                 <thead>
                   <tr className="border-b border-slate-850 text-slate-400 font-bold uppercase tracking-wider">
                     <th className="py-3 px-4 font-bold">Details</th>
-                    <th className="py-3 px-4 font-bold">Technician</th>
+                    <th className="py-3 px-4 font-bold">Consultant</th>
                     <th className="py-3 px-4 font-bold">Service Date</th>
                     <th className="py-3 px-4 font-bold">Status</th>
                   </tr>
@@ -244,16 +244,16 @@ export default function AppointmentsPage() {
             </button>
 
             <div>
-              <h3 className="text-base font-extrabold text-white">Book SmartNest Setup</h3>
+              <h3 className="text-base font-extrabold text-white">Book Setup & Feasibility Audit</h3>
               <p className="text-[11px] text-slate-400">
-                Select a technician and schedule hardware deployment audits.
+                Select a consultant and schedule startup feasibility audits.
               </p>
             </div>
 
             <form onSubmit={handleBook} className="space-y-4">
               <div>
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                  Select Certified Technician
+                  Select Expert Consultant
                 </label>
                 <select
                   value={techId}
@@ -262,7 +262,7 @@ export default function AppointmentsPage() {
                 >
                   {technicians.map((t) => (
                     <option key={t.id} value={t.id}>
-                      {t.name} (Specialist in security/mesh config)
+                      {t.name} (Specialist in manufacturing flow & layouts)
                     </option>
                   ))}
                 </select>
@@ -271,7 +271,7 @@ export default function AppointmentsPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
-                    Appointment Date
+                    Consultation Date
                   </label>
                   <input
                     type="date"
@@ -304,7 +304,7 @@ export default function AppointmentsPage() {
                 <textarea
                   required
                   rows={3}
-                  placeholder="Describe your device setup requests..."
+                  placeholder="Describe your business model and target setup requests..."
                   value={desc}
                   onChange={(e) => setDesc(e.target.value)}
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -315,7 +315,7 @@ export default function AppointmentsPage() {
                 type="submit"
                 className="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition-all shadow-md shadow-indigo-600/10 active:scale-95"
               >
-                Schedule Installation Audit
+                Schedule Setup & Feasibility Audit
               </button>
             </form>
           </div>
@@ -331,9 +331,9 @@ export default function AppointmentsPage() {
             </button>
 
             <div>
-              <h3 className="text-base font-extrabold text-white">Reschedule Visit</h3>
+              <h3 className="text-base font-extrabold text-white">Reschedule Consultation</h3>
               <p className="text-[11px] text-slate-400">
-                Select a new timestamp for this setup appointment.
+                Select a new timestamp for this setup consultation.
               </p>
             </div>
 

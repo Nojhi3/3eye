@@ -85,8 +85,8 @@ export default function TechnicianDashboard() {
 
     // 1. Add Maintenance Log to Database
     addMaintenanceLog({
-      device_id: "dev-2", // Mocking deadbolt battery swap or package hub calibration
-      device_name: job.package_id ? "SmartNest Pro Bridge" : "Yale Assure Lock 2",
+      device_id: "dev-2", // Mocking extruder calibration or package hub gateway calibration
+      device_name: job.package_id ? "IdeaForge Pro Gateway" : "Plastic Extruder & Molder Node",
       technician_id: "tech-1",
       technician_name: user?.name || "Alex Smith",
       report: techReport,
@@ -112,14 +112,14 @@ export default function TechnicianDashboard() {
         {/* Title Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-extrabold text-white tracking-tight">Technician Dashboard</h2>
+            <h2 className="text-2xl font-extrabold text-white tracking-tight">Consultant Dashboard</h2>
             <p className="text-xs text-slate-400 font-medium">
-              Manage your assigned onsite device mounting audits, complete checklists, and write diagnostics reports.
+              Manage your assigned factory floor audits, review feasibility checklists, and publish diagnostics reports.
             </p>
           </div>
           <div className="flex items-center gap-2 text-xs font-bold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-3.5 py-2 rounded-xl">
             <Wrench className="h-4 w-4 text-emerald-400" />
-            <span>Onsite Specialist: {user?.name || "Alex Smith"}</span>
+            <span>Expert Consultant: {user?.name || "Alex Smith"}</span>
           </div>
         </div>
 
@@ -129,7 +129,7 @@ export default function TechnicianDashboard() {
             {/* Left Column (1 span): Job List selector */}
             <div className="space-y-4">
               <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                Assigned Jobs ({assignedJobs.length})
+                Assigned Consultations ({assignedJobs.length})
               </h3>
               
               <div className="space-y-3">
@@ -180,7 +180,7 @@ export default function TechnicianDashboard() {
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-950 pb-4">
                     <div>
                       <span className="text-[9px] font-bold text-indigo-400 uppercase tracking-widest block mb-1">
-                        Active Job Inspector
+                          Complete Feasibility Audit Inspector
                       </span>
                       <h3 className="text-base font-extrabold text-white">{activeJob.user_name}</h3>
                       <p className="text-xs text-slate-400 mt-0.5">{activeJob.address}</p>
@@ -191,11 +191,11 @@ export default function TechnicianDashboard() {
                         onClick={() => handleStartJob(activeJob.id)}
                         className="inline-flex items-center gap-1.5 px-4.5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-bold text-white transition-all shadow-md active:scale-95 shrink-0"
                       >
-                        <Play className="h-4 w-4" /> Start Onsite Job
+                        <Play className="h-4 w-4" /> Start Feasibility Audit
                       </button>
                     ) : (
                       <span className="text-[10px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full animate-pulse">
-                        ● Job Active
+                        ● Audit Active
                       </span>
                     )}
                   </div>
@@ -207,7 +207,7 @@ export default function TechnicianDashboard() {
                       <div className="space-y-4">
                         <h4 className="text-xs font-extrabold text-white flex items-center gap-2">
                           <Activity className="h-4.5 w-4.5 text-indigo-400" />
-                          Installation Checklist
+                          Feasibility Checklist
                         </h4>
                         
                         <div className="space-y-2 bg-slate-950 p-4 border border-slate-850 rounded-2xl">
@@ -235,17 +235,17 @@ export default function TechnicianDashboard() {
                       >
                         <h4 className="text-xs font-extrabold text-white flex items-center gap-2">
                           <FileText className="h-4.5 w-4.5 text-emerald-400" />
-                          Diagnostics Checkout
+                          Audit Checkout
                         </h4>
 
                         <div>
                           <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                            Technician Notes
+                            Consultant Notes
                           </label>
                           <textarea
                             required
                             rows={3}
-                            placeholder="Detail completed wiring alignments, deadbolt motor calibrations, and firmware configurations..."
+                            placeholder="Detail completed factory layout assessments, extruder calibrations, and zoning configurations..."
                             value={techReport}
                             onChange={(e) => setTechReport(e.target.value)}
                             className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -255,7 +255,7 @@ export default function TechnicianDashboard() {
                         <div className="grid grid-cols-2 gap-4">
                           <div>
                             <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                              Next Recommended Service
+                              Next Recommended Audit
                             </label>
                             <input
                               type="date"
@@ -293,7 +293,7 @@ export default function TechnicianDashboard() {
                     <div className="p-12 text-center bg-slate-950/20 border border-dashed border-slate-850 rounded-2xl">
                       <AlertTriangle className="h-8 w-8 text-indigo-500/30 mx-auto mb-2" />
                       <p className="text-xs text-slate-500 font-semibold">
-                        This onsite visit has not started yet. Click the Start Onsite button above to view checklist diagnostics.
+                        This consultation visit has not started yet. Click the Start Feasibility Audit button above to view checklist diagnostics.
                       </p>
                     </div>
                   )}
@@ -304,7 +304,7 @@ export default function TechnicianDashboard() {
         ) : (
           <div className="py-12 text-center bg-slate-900/10 border border-dashed border-slate-900 rounded-3xl">
             <AlertTriangle className="h-8 w-8 text-slate-600 mx-auto mb-2" />
-            <p className="text-xs text-slate-500 font-semibold">You have no active installation or maintenance assignments today.</p>
+            <p className="text-xs text-slate-500 font-semibold">You have no active feasibility or maintenance assignments today.</p>
           </div>
         )}
 
@@ -317,10 +317,10 @@ export default function TechnicianDashboard() {
               <table className="w-full text-left text-xs">
                 <thead>
                   <tr className="border-b border-slate-850 text-slate-400 font-bold uppercase tracking-wider">
-                    <th className="py-3 px-4">Customer</th>
-                    <th className="py-3 px-4">Service Details</th>
+                    <th className="py-3 px-4">Entrepreneur</th>
+                    <th className="py-3 px-4">Consultation Scope</th>
                     <th className="py-3 px-4">Completion Date</th>
-                    <th className="py-3 px-4 text-right">Job Status</th>
+                    <th className="py-3 px-4 text-right">Audit Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-850/60 text-slate-300">
@@ -339,7 +339,7 @@ export default function TechnicianDashboard() {
             </div>
             {completedJobs.length === 0 && (
               <div className="p-6 text-center text-xs text-slate-500 font-medium">
-                No completed job audits found in records.
+                 No completed consultations found in records.
               </div>
             )}
           </div>

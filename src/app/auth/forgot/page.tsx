@@ -26,11 +26,11 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-md space-y-8 z-10">
         <div className="flex flex-col items-center text-center">
           <Link href="/" className="flex items-center mb-2 group">
-            <span className="text-xl font-bold text-white tracking-tight">SmartNest</span>
+            <span className="text-xl font-bold text-white tracking-tight">IdeaForge</span>
           </Link>
           <h2 className="mt-4 text-2xl font-extrabold text-white tracking-tight">Reset password</h2>
           <p className="mt-1.5 text-sm text-slate-400">
-            We will send you a recovery link to access your home
+            We will send you a recovery link to access your account
           </p>
         </div>
 

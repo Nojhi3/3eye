@@ -74,11 +74,11 @@ export default function SignupPage() {
         {/* Brand logo header */}
         <div className="flex flex-col items-center text-center">
           <Link href="/" className="flex items-center mb-2 group">
-            <span className="text-xl font-bold text-white tracking-tight">SmartNest</span>
+            <span className="text-xl font-bold text-white tracking-tight">IdeaForge</span>
           </Link>
           <h2 className="mt-2 text-2xl font-extrabold text-white tracking-tight">Create your account</h2>
           <p className="mt-1 text-sm text-slate-400">
-            Join the intelligent home automation revolution
+            Join the intelligent industrial planning community
           </p>
         </div>
 
@@ -106,7 +106,7 @@ export default function SignupPage() {
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  Homeowner
+                  Entrepreneur
                 </button>
                 <button
                   type="button"
@@ -117,7 +117,7 @@ export default function SignupPage() {
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  Technician
+                  Consultant
                 </button>
               </div>
             </div>

@@ -26,26 +26,26 @@ export default function LandingPage() {
 
   const features = [
     {
-      title: "AI Smart Home Consultant",
-      description: "Chat with our local Gemini-powered consultant to get custom device audits, ROI metrics, and package recommendations suited for your exact floor plan.",
+      title: "AI Startup Architect",
+      description: "Chat with our local Gemini-powered architect to get customized plant layouts, machinery budgets, and feasibility scores suited for your business model.",
       icon: Bot,
       color: "from-blue-500 to-indigo-600"
     },
     {
-      title: "Intelligent Energy Optimizer",
-      description: "Model your electric bills and utility load profiles. Our engine builds local thermostat setbacks and schedules to shave up to 28% off peak usage.",
+      title: "AI Capital Estimator",
+      description: "Model your machinery costs and initial cash flow metrics. Our engine builds plant projections and amortization setups to estimate clear ROI indices.",
       icon: TrendingUp,
       color: "from-emerald-400 to-teal-600"
     },
     {
-      title: "AI Predictive Maintenance",
-      description: "Real-time health audits that calculate failure probabilities, track battery wear, log device ages, and dispatch technician visits automatically.",
+      title: "Feasibility Diagnostics",
+      description: "Real-time facility audits that track machinery health indexes, log operating hours, check material load drops, and schedule dispatches automatically.",
       icon: Wrench,
       color: "from-amber-400 to-orange-600"
     },
     {
-      title: "Certified Technician Network",
-      description: "Skip complex configuration. Book certified smart home technicians who handle structural wiring, setup, mesh tuning, and local training.",
+      title: "Expert Consultant Network",
+      description: "Skip configuration hurdles. Book certified industrial setup consultants who handle floor zoning, safety checks, conveyor sync, and staff training.",
       icon: Cpu,
       color: "from-indigo-400 to-purple-600"
     }
@@ -53,55 +53,54 @@ export default function LandingPage() {
 
   const packages = [
     {
-      name: "Starter Nest",
+      name: "Eco-Friendly Blueprint",
       price: "$499",
       period: "one-time",
-      desc: "Ideal for apartments or small condos to begin your smart home journey.",
+      desc: "Ideal for small operations in recycled goods, organic packaging, or bio-plastics.",
       features: [
-        "SmartNest Central Bridge",
-        "2x Smart Energy Bulbs (RGBW)",
-        "1x Smart Power Plug (Energy monitor)",
-        "1x Smart Motion Sensor",
-        "AI Energy Recommendation Engine",
-        "Remote Technician setup guidance"
+        "IdeaForge Central Controller",
+        "2x Production Line Sensor Nodes",
+        "1x Automated Equipment Relay Switch",
+        "1x Quality Assurance Telemetry Sensor",
+        "AI financial payback & operational efficiency audit",
+        "Remote consultant setup guidance"
       ],
       cta: "Get Started",
       popular: false
     },
     {
-      name: "Premium Automation",
+      name: "Premium Setup",
       price: "$1,299",
       period: "one-time",
-      desc: "The most popular suite of devices for single-family homes seeking safety and efficiency.",
+      desc: "Our most popular setup for automated custom packaging or local assembly plants.",
       features: [
-        "SmartNest Central Bridge (Pro)",
-        "4x Smart Bulbs & 2x Dimmer Switches",
-        "1x AI Smart Thermostat (Multi-zone)",
-        "1x Secure Smart Deadbolt (Keypad)",
-        "1x Ring Video Doorbell (1080p HD)",
-        "1x Outdoor Security Camera",
-        "Full AI dashboard insights suite",
-        "Professional Technician Installation"
+        "IdeaForge Central Controller (Pro Edition)",
+        "4x Production Sensors & 2x Automated Calibrators",
+        "1x AI Climate & Temperature Heat Venting Module",
+        "1x High-Definition Assembly Line Monitor Cam",
+        "1x Central Safety Shut-off Control Gateway",
+        "Full AI metrics & raw materials supply insights",
+        "Professional expert consultant setup included"
       ],
       cta: "Buy Premium",
       popular: true
     },
     {
-      name: "Luxury Smart Haven",
+      name: "Luxury Smart Plant",
       price: "$2,999",
       period: "one-time",
-      desc: "Enterprise-grade automation and safety configuration for complete peace of mind.",
+      desc: "Enterprise-grade complete machinery integration and production-flow automation.",
       features: [
-        "Enterprise Hub (Offline storage)",
-        "10x Smart Bulbs & 4x Dimmer Switches",
-        "2x AI Smart Thermostats (Zone climate)",
-        "2x Secure Deadbolts (Biometric)",
-        "1x Video Doorbell Pro (2K HDR)",
-        "3x Floodlight Cameras",
-        "Whole-Home Smart Energy Metering",
-        "Smart Leak Detector & Water Valve",
-        "Lifetime Warranty & Tech Support",
-        "Professional Technician Installation"
+        "IdeaForge Central Gateway (Enterprise)",
+        "10x Production Line Sensors & 4x Calibrators",
+        "2x AI Smart Thermal Regulators (Venting & Cooling)",
+        "2x Biometric Facility Entrance Access Nodes",
+        "1x 2K Quality Inspection Monitor Camera",
+        "3x Assembly Monitor cams for floor managers",
+        "1x Whole-Plant Grid Power Optimizer Logger",
+        "1x Automated Safety Shut-off Material Feed Valve",
+        "Priority expert assistance & lifetime layout warranty",
+        "Custom floor script automations & scale modules"
       ],
       cta: "Go Unlimited",
       popular: false
@@ -110,20 +109,20 @@ export default function LandingPage() {
 
   const faqs = [
     {
-      q: "How does the AI Recommendation Engine work?",
-      a: "Our recommendation engine takes inputs about your home layout, family size, budget, and top priorities (e.g. security, energy efficiency, comfort). It runs these through a custom prompt architecture using Google's Gemini model to produce custom package recommendations, estimated installation costs, and specific monthly energy payback metrics."
+      q: "How does the AI Feasibility Engine work?",
+      a: "Our recommendation engine takes inputs about your industry sector, target capacity, capital budget, and top operational priorities (e.g. ESG compliance, speed, high margins). It runs these through a custom prompt architecture using Google's Gemini model to produce tailored plant recommendations, estimated setup costs, and ROI payback metrics."
     },
     {
-      q: "Does SmartNest require professional installation?",
-      a: "The Starter package is optimized for easy self-installation. The Premium and Luxury packages include complete white-glove professional installation by certified technicians in our network. You can schedule, reschedule, and view checklists for your appointments directly inside the app."
+      q: "Does IdeaForge require expert consultant setup?",
+      a: "The Starter package is optimized for easy self-assembly. The Premium and Luxury packages include complete professional setup by certified consultants in our network. You can schedule audits and view checkouts directly inside the app."
     },
     {
-      q: "What is Predictive Maintenance?",
-      a: "Predictive Maintenance continuously tracks telemetry like battery levels, device age, firmware logs, and service history. Using this data, the AI predicts potential failures before they occur (e.g. warning cards for dead deadbolt batteries or camera offline warnings) and lets you schedule technician repairs with one click."
+      q: "What is Feasibility Diagnostics?",
+      a: "Feasibility Diagnostics continuously tracks operational telemetry like sensor logs, material fill capacities, machinery age, and maintenance logs. Using this, the AI predicts potential failures before they block lines (e.g. flagging extruder nozzle degradation) and lets you dispatch expert calibrators instantly."
     },
     {
-      q: "Can I use existing smart home devices?",
-      a: "Yes! The SmartNest Central Bridge is built on Matter and Zigbee protocols, letting you connect existing devices from Apple Home, Google Nest, Philips Hue, Yale, and Ring seamlessly."
+      q: "Can I use existing manufacturing machinery?",
+      a: "Yes! The IdeaForge Central Gateway is built on industry-standard IoT and industrial protocols (Modbus, OPC UA, Zigbee), letting you connect existing devices from Creality, Yale, Philips, and other providers seamlessly."
     }
   ];
 
@@ -138,7 +137,7 @@ export default function LandingPage() {
       <header className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-900/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center cursor-pointer">
-            <span className="text-lg font-bold text-white tracking-tight">SmartNest</span>
+            <span className="text-lg font-bold text-white tracking-tight">IdeaForge</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
@@ -173,7 +172,7 @@ export default function LandingPage() {
 
           {/* Heading */}
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-[1.1]">
-            Automate and Secure Your Home with{" "}
+            Architect and Optimize Your Manufacturing Plans with{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-emerald-400">
               Intelligent AI
             </span>
@@ -181,8 +180,8 @@ export default function LandingPage() {
 
           {/* Subtitle */}
           <p className="text-lg text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
-            SmartNest merges predictive device maintenance, dynamic energy savings, 
-            and white-glove professional installation into a single, cohesive automation platform.
+            IdeaForge merges predictive machinery diagnostics, dynamic resource planning, 
+            and professional setup consultant networks into a single, cohesive industrial planning ecosystem.
           </p>
 
           {/* CTAs */}
@@ -209,7 +208,7 @@ export default function LandingPage() {
               <div className="rounded-2xl border border-slate-850 overflow-hidden bg-slate-950 aspect-[16/9] relative group">
                 <img
                   src="/image.png"
-                  alt="SmartNest Operating Core Dashboard"
+                  alt="IdeaForge Operating Core Dashboard"
                   className="w-full h-full object-cover opacity-85 group-hover:scale-102 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-slate-950/40 flex items-center justify-center">
@@ -230,9 +229,9 @@ export default function LandingPage() {
       <section id="features" className="py-20 border-t border-slate-900 bg-slate-950/40 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="text-center space-y-4 max-w-2xl mx-auto">
-            <h2 className="text-3xl font-extrabold text-white tracking-tight">AI Smart Home Suite</h2>
+            <h2 className="text-3xl font-extrabold text-white tracking-tight">AI Startup & Manufacturing Suite</h2>
             <p className="text-sm text-slate-400 leading-relaxed font-medium">
-              We leverage local and cloud intelligence to provide security diagnostics, predictive repairs, and billing optimization that standard providers cannot support.
+              We leverage AI analytics to provide capital feasibility diagnostics, predictive machinery repair warnings, and automated factory resource optimization.
             </p>
           </div>
 
@@ -263,7 +262,7 @@ export default function LandingPage() {
           <div className="text-center space-y-4 max-w-2xl mx-auto">
             <h2 className="text-3xl font-extrabold text-white tracking-tight">Workflow & Delivery</h2>
             <p className="text-sm text-slate-400 font-medium">
-              From automated device discovery to certified technician deployment—we guide you in 4 steps.
+              From automated startup idea discovery to certified setup consultant deployment—we guide you in 4 steps.
             </p>
           </div>
 
@@ -271,23 +270,23 @@ export default function LandingPage() {
             {[
               {
                 step: "01",
-                label: "AI Audit & Consultation",
-                desc: "Describe your home type, appliances, and goals. Gemini builds recommendations, budgets, and savings reports."
+                label: "AI Feasibility Audit",
+                desc: "Describe your industry sector, budget, and scale target. Gemini builds recommendations, cost projections, and ROI metrics."
               },
               {
                 step: "02",
-                label: "Select Automation Package",
-                desc: "Choose from Starter, Premium, or Luxury options with comparative summaries and buy instantly."
+                label: "Select Plant Blueprint",
+                desc: "Choose from Eco-Friendly, Premium, or Luxury options with comparative machinery inventories and buy blueprint setups."
               },
               {
                 step: "03",
-                label: "Technician Installation",
-                desc: "Certified technicians visit, handle mountings, wiring, set up the Central Bridge, and train your family."
+                label: "Consultant Floor Mapping",
+                desc: "Certified consultants assist on-site, verify layout permissions, test extruder calibration, and train operators."
               },
               {
                 step: "04",
-                label: "Optimize & Save",
-                desc: "Monitor energy, review predictions, toggle device states, and chat with AI in real time."
+                label: "Track & Scale",
+                desc: "Monitor raw materials, review diagnostics warnings, toggle machinery operational statuses, and query the AI architect."
               }
             ].map((item, index) => (
               <div key={item.step} className="space-y-4 relative">
@@ -310,9 +309,9 @@ export default function LandingPage() {
       <section id="pricing" className="py-20 border-t border-slate-900 bg-slate-950/40 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="text-center space-y-4 max-w-2xl mx-auto">
-            <h2 className="text-3xl font-extrabold text-white tracking-tight">Automation Pricing</h2>
+            <h2 className="text-3xl font-extrabold text-white tracking-tight">Machinery & Setup Pricing</h2>
             <p className="text-sm text-slate-400 font-medium">
-              Choose the package that fits your home. Complete setups with transparent pricing.
+              Choose the blueprint and equipment package that fits your business. Complete factory setups with transparent pricing.
             </p>
           </div>
 
@@ -473,10 +472,10 @@ export default function LandingPage() {
           <div className="relative rounded-3xl bg-slate-900 overflow-hidden border border-slate-800 p-8 md:p-12 text-center space-y-6">
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 via-transparent to-emerald-500/10 pointer-events-none" />
             <h2 className="text-3xl font-extrabold text-white tracking-tight max-w-md mx-auto">
-              Ready to build your SmartNest?
+              Ready to design your setup blueprint?
             </h2>
             <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
-              Register a free account, test out the custom energy optimization modeling, and book local setup services instantly.
+              Register a free account, simulate factory capital configurations, and book expert consulting audits instantly.
             </p>
             <div className="pt-2">
               <Link
@@ -494,10 +493,10 @@ export default function LandingPage() {
       <footer className="border-t border-slate-900 bg-slate-950 py-8 mt-auto z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
           <Link href="/" className="flex items-center cursor-pointer">
-            <span className="text-sm font-bold text-white tracking-tight">SmartNest</span>
+            <span className="text-sm font-bold text-white tracking-tight">IdeaForge</span>
           </Link>
           <p className="text-[11px] text-slate-500 font-medium">
-            &copy; {new Date().getFullYear()} SmartNest. All rights reserved.
+            &copy; {new Date().getFullYear()} IdeaForge. All rights reserved.
           </p>
           <div className="flex gap-4 text-[11px] font-bold text-slate-400">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

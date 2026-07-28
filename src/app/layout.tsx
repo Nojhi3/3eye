@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SmartNest - Intelligent Smart Home Platform",
-  description: "Discover, install, and optimize your smart home environment with Gemini AI.",
+  title: "IdeaForge - AI Startup & Manufacturing Explorer",
+  description: "Discover, calibrate, and plan your manufacturing startup blueprints with Gemini AI.",
 };
 
 export default function RootLayout({
