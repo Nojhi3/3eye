@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { readLocalState, removeLocalState, writeLocalState } from "@/lib/local-db";
 
 // Types corresponding to Database Schema
 export interface User {
@@ -251,18 +252,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedUser = localStorage.getItem("sn_user");
-      if (storedUser) setUser(JSON.parse(storedUser));
+      const hydrate = async () => {
+      const storedUser = await readLocalState<User>("sn_user");
+      if (storedUser) setUser(storedUser);
 
-      const storedHomes = localStorage.getItem("sn_homes");
-      const storedDevices = localStorage.getItem("sn_devices");
-      const storedOrders = localStorage.getItem("sn_orders");
-      const storedAppointments = localStorage.getItem("sn_appointments");
-      const storedMaintenance = localStorage.getItem("sn_maintenance");
-      const storedReports = localStorage.getItem("sn_reports");
-      const storedChat = localStorage.getItem("sn_chat");
+      const storedHomes = await readLocalState<Home[]>("sn_homes");
+      const storedDevices = await readLocalState<Device[]>("sn_devices");
+      const storedOrders = await readLocalState<Order[]>("sn_orders");
+      const storedAppointments = await readLocalState<Appointment[]>("sn_appointments");
+      const storedMaintenance = await readLocalState<Maintenance[]>("sn_maintenance");
+      const storedReports = await readLocalState<AIReport[]>("sn_reports");
+      const storedChat = await readLocalState<ChatMessage[]>("sn_chat");
 
-      if (storedHomes) setHomes(JSON.parse(storedHomes));
+      if (storedHomes) setHomes(storedHomes);
       else {
         const seedHome: Home = {
           id: "home-1",
@@ -275,10 +277,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           zipcode: "78744"
         };
         setHomes([seedHome]);
-        localStorage.setItem("sn_homes", JSON.stringify([seedHome]));
+        void writeLocalState("sn_homes", [seedHome]);
       }
 
-      if (storedDevices) setDevices(JSON.parse(storedDevices));
+      if (storedDevices) setDevices(storedDevices);
       else {
         const seedDevices: Device[] = [
           {
@@ -363,10 +365,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           }
         ];
         setDevices(seedDevices);
-        localStorage.setItem("sn_devices", JSON.stringify(seedDevices));
+        void writeLocalState("sn_devices", seedDevices);
       }
 
-      if (storedOrders) setOrders(JSON.parse(storedOrders));
+      if (storedOrders) setOrders(storedOrders);
       else {
         const seedOrders: Order[] = [
           {
@@ -380,10 +382,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           }
         ];
         setOrders(seedOrders);
-        localStorage.setItem("sn_orders", JSON.stringify(seedOrders));
+        void writeLocalState("sn_orders", seedOrders);
       }
 
-      if (storedAppointments) setAppointments(JSON.parse(storedAppointments));
+      if (storedAppointments) setAppointments(storedAppointments);
       else {
         const seedAppointments: Appointment[] = [
           {
@@ -406,10 +408,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           }
         ];
         setAppointments(seedAppointments);
-        localStorage.setItem("sn_appointments", JSON.stringify(seedAppointments));
+        void writeLocalState("sn_appointments", seedAppointments);
       }
 
-      if (storedMaintenance) setMaintenanceLogs(JSON.parse(storedMaintenance));
+      if (storedMaintenance) setMaintenanceLogs(storedMaintenance);
       else {
         const seedMaintenance: Maintenance[] = [
           {
@@ -424,10 +426,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           }
         ];
         setMaintenanceLogs(seedMaintenance);
-        localStorage.setItem("sn_maintenance", JSON.stringify(seedMaintenance));
+        void writeLocalState("sn_maintenance", seedMaintenance);
       }
 
-      if (storedReports) setAiReports(JSON.parse(storedReports));
+      if (storedReports) setAiReports(storedReports);
       else {
         const seedReport: AIReport = {
           id: "rep-1",
@@ -467,17 +469,20 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           created_at: "2026-07-20"
         };
         setAiReports([seedReport]);
-        localStorage.setItem("sn_reports", JSON.stringify([seedReport]));
+        void writeLocalState("sn_reports", [seedReport]);
       }
 
-      if (storedChat) setChatHistory(JSON.parse(storedChat));
+      if (storedChat) setChatHistory(storedChat);
       else {
         const seedChat: ChatMessage[] = [
           { id: "chat-1", sender: "ai", text: "Hello! I am your IdeaForge Consultant. How can I help you discover, evaluate, and build your startup or manufacturing idea today?", timestamp: new Date().toLocaleTimeString() }
         ];
         setChatHistory(seedChat);
-        localStorage.setItem("sn_chat", JSON.stringify(seedChat));
+        void writeLocalState("sn_chat", seedChat);
       }
+      };
+
+      void hydrate();
     }
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
@@ -490,7 +495,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   ) => {
     stateSetter(data);
     if (typeof window !== "undefined") {
-      localStorage.setItem(key, JSON.stringify(data));
+      void writeLocalState(key, data);
     }
   };
 
@@ -506,7 +511,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
     setUser(dummyUser);
     if (typeof window !== "undefined") {
-      localStorage.setItem("sn_user", JSON.stringify(dummyUser));
+      void writeLocalState("sn_user", dummyUser);
     }
     return true;
   };
@@ -514,7 +519,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const logout = () => {
     setUser(null);
     if (typeof window !== "undefined") {
-      localStorage.removeItem("sn_user");
+      void removeLocalState("sn_user");
     }
   };
 
@@ -529,7 +534,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     };
     setUser(newUser);
     if (typeof window !== "undefined") {
-      localStorage.setItem("sn_user", JSON.stringify(newUser));
+      void writeLocalState("sn_user", newUser);
     }
     
     // Create matching initial home if entrepreneur (homeowner role internally)
@@ -553,7 +558,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const updatedUser = { ...user, name, phone };
     setUser(updatedUser);
     if (typeof window !== "undefined") {
-      localStorage.setItem("sn_user", JSON.stringify(updatedUser));
+      void writeLocalState("sn_user", updatedUser);
     }
   };
 
@@ -837,7 +842,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setChatHistory((prev: ChatMessage[]) => {
       const updated = [...prev, newMessage];
       if (typeof window !== "undefined") {
-        localStorage.setItem("sn_chat", JSON.stringify(updated));
+        void writeLocalState("sn_chat", updated);
       }
       return updated;
     });
